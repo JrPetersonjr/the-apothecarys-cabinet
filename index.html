@@ -45,9 +45,7 @@
       <div class="header-actions">
         <button class="btn-owner-lock" onclick="window.ApothecaryStore.openOwnerPortal()" title="Herbalist Merchant Console & POS">🔐 Herbalist Portal</button>
         
-        <a href="studio.html" class="btn-header-action" title="Open WebStudio Admin Dashboard">
-          ⚙️ Studio Admin
-        </a>
+
         <button class="btn-header-action" onclick="window.ApothecaryStore.openOrdersLedger()" title="View past invoices and orders">
           🧾 Invoices &amp; Orders
         </button>
@@ -99,6 +97,97 @@
     <span>🧪 Small-Batch Lab Certified</span>
     <span>•</span>
     <span>♻️ 100% Recyclable Amber Glass</span>
+  </section>
+
+  <!-- ── Featured Specials & Announcements ──────────────────────────────── -->
+  <section class="featured-promos-section" id="specials">
+    <div class="featured-promos-header">
+      <span class="section-kicker">WORKSHOP HIGHLIGHTS &amp; SPECIALS</span>
+      <h3 class="section-title">This Week's Featured Highlights &amp; Announcements</h3>
+      <p class="section-sub">Seasonal promotions, newly dropped batches, and official workshop flyers.</p>
+    </div>
+
+    <div class="featured-promos-grid">
+      <!-- Promo 1: Annual Sale & BOGO Specials -->
+      <article class="promo-card">
+        <div class="promo-img-wrap" onclick="window.ApothecaryStore.openMenuBrochureModal()">
+          <img src="assets/sale-black-friday.jpg" alt="Annual Sale &amp; Specials Flyer" loading="lazy">
+          <span class="promo-badge">Limited Event</span>
+        </div>
+        <div class="promo-content">
+          <h4>Annual Sale &amp; BOGO Specials</h4>
+          <p>BOGO 1/2 OFF Bath Teas &amp; Bath Bombs, 1/2 OFF Teas &amp; Scrubs, $13 Rubs, BOGO Lip Balm, plus limited Men's Beard Kits and Custom Keepsakes.</p>
+          <div class="promo-action">
+            <button class="btn-primary-sm" onclick="window.scrollTo({top: document.getElementById('catalog').offsetTop - 60, behavior: 'smooth'})">
+              Shop Sale Items ➔
+            </button>
+            <button class="btn-outline-sm" onclick="window.ApothecaryStore.openMenuBrochureModal()">
+              View Flyer
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Promo 2: NEW Lavish Lotion Bar Beads -->
+      <article class="promo-card">
+        <div class="promo-img-wrap" onclick="window.ApothecaryStore.openProductModal('prod-lotion-beads')">
+          <img src="assets/product-lotion-beads.jpg" alt="Lavish Lotion Bar Beads Announcement" loading="lazy">
+          <span class="promo-badge">New Arrival</span>
+        </div>
+        <div class="promo-content">
+          <h4>NEW! Lavish Lotion Bar Beads</h4>
+          <p>A new spin on a shop favorite! Beloved solid lotion bars transformed into mini beads in a charming reusable nightstand jar. No messy chunks!</p>
+          <div class="promo-action">
+            <button class="btn-primary-sm" onclick="window.ApothecaryStore.addToCart('prod-lotion-beads')">
+              + Add to Basket ($16)
+            </button>
+            <button class="btn-outline-sm" onclick="window.ApothecaryStore.openProductModal('prod-lotion-beads')">
+              Details
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Promo 3: Herbal Face Serum Formulation -->
+      <article class="promo-card">
+        <div class="promo-img-wrap" onclick="window.ApothecaryStore.openProductModal('prod-herbal-face-serum')">
+          <img src="assets/product-herbal-face-serum.jpg" alt="Herbal Face Serum Launch" loading="lazy">
+          <span class="promo-badge">Skin Ritual</span>
+        </div>
+        <div class="promo-content">
+          <h4>Herbal Face Serum (Rose &amp; Hyaluronic Acid)</h4>
+          <p>Distilled rose, chamomile &amp; rosemary waters with plant hyaluronic acid for lasting, weightless hydration. Formulated without oils or alcohol.</p>
+          <div class="promo-action">
+            <button class="btn-primary-sm" onclick="window.ApothecaryStore.addToCart('prod-herbal-face-serum')">
+              + Add to Basket ($28)
+            </button>
+            <button class="btn-outline-sm" onclick="window.ApothecaryStore.openProductModal('prod-herbal-face-serum')">
+              Details
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Promo 4: Author Field Guide Book -->
+      <article class="promo-card">
+        <div class="promo-img-wrap" onclick="window.ApothecaryStore.openProductModal('prod-field-guide-book')">
+          <img src="assets/book-field-guide.jpg" alt="A Field Guide to Foraging &amp; Folk Healing" loading="lazy">
+          <span class="promo-badge">Author Release</span>
+        </div>
+        <div class="promo-content">
+          <h4>A Field Guide to Foraging &amp; Folk Healing</h4>
+          <p>Written by The Apothecary's Cabinet. Learn backyard plant identification, sustainable wildcrafting, and crafting folk preparations at home.</p>
+          <div class="promo-action">
+            <button class="btn-primary-sm" onclick="window.ApothecaryStore.addToCart('prod-field-guide-book')">
+              + Add Book ($22)
+            </button>
+            <button class="btn-outline-sm" onclick="window.ApothecaryStore.openProductModal('prod-field-guide-book')">
+              Details
+            </button>
+          </div>
+        </div>
+      </article>
+    </div>
   </section>
 
   <!-- Main Catalog Controls -->
@@ -228,7 +317,7 @@
 
     <div class="footer-bottom">
       <div>&copy; 2026 The Apothecary's Cabinet. All rights reserved.</div>
-      <div>Direct Selling &amp; Invoice Portal Powered by WebStudio</div>
+      <div>Curated from recipe up • Handcrafted with care by Lynn</div>
     </div>
   </footer>
 

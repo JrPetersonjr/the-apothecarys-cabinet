@@ -49,7 +49,7 @@
     "comparePrice": null,
     "stock": 35,
     "lowStockThreshold": 8,
-    "image": "assets/product-lotion-beads.jpg",
+    "image": "assets/prod-lotion-beads-clean.png",
     "fulfillmentType": "studio",
     "description": "A new spin on a shop favorite! Lynn has taken her beloved Lavish Lotion Bars and transformed them into mini beads \u2014 perfect for on-the-go hydration or keeping right beside your nightstand. The same deeply moisturizing formula you love, shrunk into bite-sized minis that melt on contact. No more messy chunks to fight with! Packaged in a charming reusable keepsake glass jar.",
     "ingredients": "Pure Local Beeswax, Organic Unrefined Shea Butter, Cold-Pressed Coconut Oil, Golden Jojoba Oil, Sweet Almond Oil, Vitamin E, Gentle Essential Oils.",
@@ -67,7 +67,7 @@
     "comparePrice": 34.0,
     "stock": 24,
     "lowStockThreshold": 6,
-    "image": "assets/product-herbal-face-serum.jpg",
+    "image": "assets/prod-face-serum-clean.svg",
     "fulfillmentType": "studio",
     "description": "A gentle, plant-powered serum crafted by Lynn to hydrate, soothe, and balance the skin. Made with distilled rose, chamomile, and rosemary hydrosols for a light herbal freshness that calms irritation while supporting a radiant glow. Pure vegetable glycerin and hyaluronic acid draw in lasting moisture without clogging pores, leaving skin soft, dewy, and plump. Formulated completely without oils, alcohol, or harsh chemicals.",
     "ingredients": "Distilled Rose Hydrosol, Chamomile Flower Water, Rosemary Hydrosol, Botanical Hyaluronic Acid, Organic Vegetable Glycerin, Radish Root Ferment (natural preservative).",
@@ -416,7 +416,7 @@
 ];
 
   // Version migration to ensure live site loads authentic catalog
-  const CATALOG_VERSION = "2026-v7-authentic-lynn";
+  const CATALOG_VERSION = "2026-v8-clean-cards-featured";
   if (localStorage.getItem("apothecary_cat_version") !== CATALOG_VERSION) {
     localStorage.removeItem("apothecary_products");
     localStorage.removeItem("apothecary_config");
