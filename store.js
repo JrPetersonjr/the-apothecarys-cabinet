@@ -416,7 +416,7 @@
 ];
 
   // Version migration to ensure live site loads authentic catalog
-  const CATALOG_VERSION = "2026-v8-clean-cards-featured";
+  const CATALOG_VERSION = "2026-v9-highres-brochure";
   if (localStorage.getItem("apothecary_cat_version") !== CATALOG_VERSION) {
     localStorage.removeItem("apothecary_products");
     localStorage.removeItem("apothecary_config");
