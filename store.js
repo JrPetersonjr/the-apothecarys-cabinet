@@ -778,14 +778,14 @@
   // ── Merchant / Herbalist Portal & POS Engine ──────────────────────────────
   let portalState = {
     activeTab: "tab-portal-products",
-    ownerPin: localStorage.getItem("apothecary_pin") || "1894",
+    ownerPin: localStorage.getItem("apothecary_pin") || "2018",
     editingProductId: null,
     tempImageDataUrl: null,
     posCart: []
   };
 
   function openOwnerPortal() {
-    const enteredPin = prompt("🌿 The Apothecary's Cabinet — Merchant Portal\nEnter your 4-digit Herbalist PIN (Default: 1894):");
+    const enteredPin = prompt("🌿 The Apothecary's Cabinet — Merchant Portal\nEnter your 4-digit Herbalist PIN (Default: 2018):");
     if (!enteredPin) return;
 
     if (enteredPin !== portalState.ownerPin) {

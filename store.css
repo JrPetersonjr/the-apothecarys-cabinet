@@ -1363,3 +1363,134 @@ body::before {
 }
 .btn-tag:hover { background: var(--moss-700); }
 .btn-tag.danger { background: var(--red-accent); }
+
+
+/* ── Witchy & Botanical Vine Styling (Client Brand Flavor) ───────────────── */
+:root {
+  --witch-glow: rgba(216, 176, 86, 0.28);
+  --mystic-purple: rgba(54, 33, 51, 0.4);
+}
+
+.site-header {
+  border-bottom: 2px solid var(--gold-600);
+  background: linear-gradient(180deg, rgba(10, 20, 15, 0.98) 0%, rgba(18, 32, 24, 0.96) 100%);
+}
+
+.brand-crest {
+  width: 52px;
+  height: 52px;
+  filter: drop-shadow(0 0 10px rgba(216, 176, 86, 0.5));
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.brand:hover .brand-crest {
+  transform: scale(1.1) rotate(-3deg);
+  filter: drop-shadow(0 0 16px rgba(245, 215, 127, 0.8));
+}
+
+.hero {
+  background: 
+    radial-gradient(circle at 50% 35%, rgba(216, 176, 86, 0.12) 0%, transparent 60%),
+    radial-gradient(circle at 15% 80%, rgba(46, 31, 43, 0.5) 0%, transparent 50%),
+    linear-gradient(135deg, #09130d 0%, #122218 50%, #0d1a12 100%) !important;
+  position: relative;
+  overflow: hidden;
+  padding: 80px 24px 85px !important;
+}
+
+/* Floating Golden Botanical Spores Animation */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle, rgba(245, 215, 127, 0.6) 1px, transparent 1px),
+    radial-gradient(circle, rgba(162, 217, 180, 0.4) 1.5px, transparent 1.5px);
+  background-size: 80px 80px, 140px 140px;
+  background-position: 0 0, 40px 60px;
+  opacity: 0.35;
+  animation: floatSpores 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes floatSpores {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(1deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+/* Vine Corners framing the Hero */
+.hero-vine {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  pointer-events: none;
+  opacity: 0.85;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6));
+  z-index: 1;
+  transition: opacity 0.3s;
+}
+.hero-vine-tl { top: 0; left: 0; }
+.hero-vine-tr { top: 0; right: 0; transform: scaleX(-1); }
+.hero-vine-bl { bottom: 0; left: 0; transform: scaleY(-1); }
+.hero-vine-br { bottom: 0; right: 0; transform: scale(-1, -1); }
+
+@media (max-width: 600px) {
+  .hero-vine { width: 90px; height: 90px; }
+}
+
+/* Hero Emblem of Actual Client Logo */
+.hero-emblem-wrap {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+.hero-logo-actual {
+  width: 110px;
+  height: auto;
+  filter: drop-shadow(0 0 16px rgba(216, 176, 86, 0.6));
+  animation: pulseAura 4s ease-in-out infinite alternate;
+}
+
+@keyframes pulseAura {
+  0% { filter: drop-shadow(0 0 12px rgba(216, 176, 86, 0.4)); transform: scale(1); }
+  100% { filter: drop-shadow(0 0 24px rgba(245, 215, 127, 0.8)); transform: scale(1.03); }
+}
+
+/* Botanical Vine Divider */
+.vine-divider-wrap {
+  max-width: 720px;
+  margin: 10px auto 20px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+}
+.vine-divider-img {
+  width: 100%;
+  max-width: 600px;
+  height: 48px;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
+}
+
+/* Product Card Flourishes */
+.product-card {
+  border: 1px solid rgba(194, 152, 59, 0.35) !important;
+  background: linear-gradient(180deg, #ffffff 0%, #faf8f2 100%) !important;
+  position: relative;
+}
+.product-card:hover {
+  border-color: var(--gold-500) !important;
+  box-shadow: 0 14px 40px rgba(10, 20, 15, 0.18), 0 0 18px rgba(216, 176, 86, 0.25) !important;
+}
+
+/* Moon Phase Widget in Header/Notice */
+.moon-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(216, 176, 86, 0.15);
+  border: 1px solid rgba(216, 176, 86, 0.4);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  color: var(--gold-400);
+}
