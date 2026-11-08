@@ -43,6 +43,8 @@
       </nav>
 
       <div class="header-actions">
+        <button class="btn-owner-lock" onclick="window.ApothecaryStore.openOwnerPortal()" title="Herbalist Merchant Console & POS">🔐 Herbalist Portal</button>
+        
         <a href="studio.html" class="btn-header-action" title="Open WebStudio Admin Dashboard">
           ⚙️ Studio Admin
         </a>
@@ -86,6 +88,7 @@
   <section id="catalog" class="catalog-controls">
     <div class="category-pills">
       <button class="cat-pill active" data-cat="all">All Remedies</button>
+      <button class="cat-pill" data-cat="soaps">Soaps &amp; Bars</button>
       <button class="cat-pill" data-cat="tinctures">Tinctures &amp; Elixirs</button>
       <button class="cat-pill" data-cat="salves">Salves &amp; Balms</button>
       <button class="cat-pill" data-cat="teas">Teas &amp; Infusions</button>
@@ -550,6 +553,336 @@
       </div>
       <div class="modal-footer">
         <button class="btn-secondary" onclick="window.ApothecaryStore.closeOrdersLedger()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- ── Herbalist Merchant Portal & Counter POS Modal ────────────────────── -->
+  <div class="portal-overlay" id="owner-portal-modal" onclick="if(event.target===this) window.ApothecaryStore.closeOwnerPortal()">
+    <div class="portal-window">
+      <div class="portal-topbar">
+        <div class="portal-title-area">
+          <img src="assets/logo-crest.svg" alt="Crest" style="width: 32px; height: 32px;">
+          <div>
+            <h3>Herbalist Merchant Portal &amp; Point of Sale</h3>
+            <div style="font-size: 11px; color: var(--gold-400);">The Apothecary's Cabinet • Management Console</div>
+          </div>
+        </div>
+        <button class="modal-close" onclick="window.ApothecaryStore.closeOwnerPortal()">✕</button>
+      </div>
+
+      <div class="portal-nav-tabs">
+        <button class="portal-tab-btn active" data-tab="tab-portal-products" onclick="window.ApothecaryStore.showPortalTab('tab-portal-products')">
+          📦 Products &amp; Soap Bars
+        </button>
+        <button class="portal-tab-btn" data-tab="tab-portal-pos" onclick="window.ApothecaryStore.showPortalTab('tab-portal-pos')">
+          🛍️ Counter POS Register
+        </button>
+        <button class="portal-tab-btn" data-tab="tab-portal-promos" onclick="window.ApothecaryStore.showPortalTab('tab-portal-promos')">
+          🏷️ Sales &amp; Promo Codes
+        </button>
+        <button class="portal-tab-btn" data-tab="tab-portal-orders" onclick="window.ApothecaryStore.showPortalTab('tab-portal-orders')">
+          🧾 Invoices &amp; Orders
+        </button>
+        <button class="portal-tab-btn" data-tab="tab-portal-backup" onclick="window.ApothecaryStore.showPortalTab('tab-portal-backup')">
+          💾 Backup &amp; PIN
+        </button>
+      </div>
+
+      <div class="portal-content">
+        <!-- 1. Products Management -->
+        <div class="portal-view active" id="tab-portal-products">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <div>
+              <h4 style="font-family: var(--font-serif); font-size: 1.15rem; color: var(--moss-900);">Apothecary Remedy Catalog</h4>
+              <p style="font-size: 0.8rem; color: #666;">Add new soap bars, update prices, adjust inventory, and edit botanical descriptions.</p>
+            </div>
+            <button class="btn-primary" onclick="window.ApothecaryStore.openCreateProductForm()">
+              + Add New Soap Bar / Remedy
+            </button>
+          </div>
+
+          <table class="invoice-table" style="background: #fff; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+            <thead>
+              <tr>
+                <th style="width: 50px;">Vessel</th>
+                <th>Remedy Formulation</th>
+                <th>SKU</th>
+                <th>Price</th>
+                <th>Stock Units</th>
+                <th style="text-align: right;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="portal-products-tbody">
+              <!-- Rendered by store.js -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 2. Counter Point of Sale (POS) -->
+        <div class="portal-view" id="tab-portal-pos">
+          <div class="pos-layout">
+            <div>
+              <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: var(--moss-900); margin-bottom: 10px;">
+                Touch to Add to Counter Ticket:
+              </h4>
+              <div class="pos-catalog-grid" id="pos-catalog-grid">
+                <!-- Rendered by store.js -->
+              </div>
+            </div>
+
+            <!-- Counter Register Ticket -->
+            <div class="pos-ticket-panel">
+              <h4 style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--moss-900); display: flex; align-items: center; justify-content: space-between;">
+                <span>Counter Register</span>
+                <span style="font-size: 0.75rem; background: var(--moss-800); color: var(--gold-400); padding: 2px 6px; border-radius: 3px;">POS Live</span>
+              </h4>
+
+              <div class="pos-ticket-items" id="pos-ticket-items">
+                <!-- POS ticket items rendered by store.js -->
+              </div>
+
+              <div style="margin-bottom: 14px; font-size: 0.85rem;">
+                <div class="summary-row"><span>Subtotal:</span> <span id="pos-subtotal">$0.00</span></div>
+                <div class="summary-row"><span>Local Sales Tax (7%):</span> <span id="pos-tax">$0.00</span></div>
+                <div class="summary-row total-row" style="margin-top: 6px; padding-top: 6px;">
+                  <span>Ticket Total:</span> <span id="pos-total">$0.00</span>
+                </div>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <button class="btn-primary" style="justify-content: center;" onclick="window.ApothecaryStore.posCheckout('Cash')">
+                  💵 Charge Cash &amp; Print Receipt
+                </button>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                  <button class="btn-secondary" style="background: var(--moss-800); color: #fff; font-size: 0.8rem; justify-content: center;" onclick="window.ApothecaryStore.posCheckout('Card / Tap')">
+                    💳 Card / Tap
+                  </button>
+                  <button class="btn-secondary" style="background: #0070ba; color: #fff; font-size: 0.8rem; justify-content: center;" onclick="window.ApothecaryStore.posCheckout('Venmo / QR')">
+                    📱 Venmo / QR
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Promotions & Sales -->
+        <div class="portal-view" id="tab-portal-promos">
+          <div style="max-width: 800px; display: flex; flex-direction: column; gap: 24px;">
+            <!-- Top Announcement Ticker Editor -->
+            <div style="background: #fff; padding: 20px; border-radius: 6px; border: 1px solid var(--parchment-300);">
+              <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: var(--moss-900); margin-bottom: 8px;">
+                📢 Live Storefront Announcement Ticker
+              </h4>
+              <p style="font-size: 0.82rem; color: #666; margin-bottom: 12px;">This message displays at the very top of your online store for all visitors.</p>
+              <div style="display: flex; gap: 10px;">
+                <input type="text" id="portal-announcement-input" class="form-ctrl" placeholder="e.g. 🍂 Autumn Soap Harvest: 15% off all soap bars this week!" value="Free Botanical Ground Delivery on orders over $65.00" />
+                <button class="btn-primary" onclick="window.ApothecaryStore.saveAnnouncementFromPortal()">Update Ticker</button>
+              </div>
+            </div>
+
+            <!-- Coupon Codes Manager -->
+            <div style="background: #fff; padding: 20px; border-radius: 6px; border: 1px solid var(--parchment-300);">
+              <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: var(--moss-900); margin-bottom: 8px;">
+                🏷️ Active Botanical Coupon Codes
+              </h4>
+              <table class="invoice-table" style="margin-bottom: 16px;">
+                <thead>
+                  <tr>
+                    <th>Promo Code</th>
+                    <th>Promotion Label</th>
+                    <th>Discount</th>
+                    <th style="text-align: right;">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="portal-promos-tbody">
+                  <!-- Rendered by store.js -->
+                </tbody>
+              </table>
+
+              <h5 style="font-size: 0.85rem; margin-bottom: 10px; color: var(--moss-900);">Create New Promo Code:</h5>
+              <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 2fr auto; gap: 8px; align-items: center;">
+                <input type="text" id="new-promo-code" class="form-ctrl" placeholder="e.g. SOAPLOVE" style="text-transform: uppercase;" />
+                <select id="new-promo-type" class="form-ctrl">
+                  <option value="percent">% Percent Off</option>
+                  <option value="shipping">Free Shipping</option>
+                </select>
+                <input type="number" id="new-promo-val" class="form-ctrl" placeholder="15" value="15" />
+                <input type="text" id="new-promo-label" class="form-ctrl" placeholder="15% Off All Handcrafted Soaps" />
+                <button class="btn-primary" onclick="window.ApothecaryStore.addPromoCodeFromPortal()">+ Add Code</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Orders & Invoices -->
+        <div class="portal-view" id="tab-portal-orders">
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-family: var(--font-serif); font-size: 1.15rem; color: var(--moss-900);">Customer Orders &amp; Receipts Ledger</h4>
+            <p style="font-size: 0.8rem; color: #666;">Track online web orders and counter walk-in sales. View, download, or re-print invoices.</p>
+          </div>
+
+          <table class="invoice-table" style="background: #fff; border-radius: 6px; overflow: hidden;">
+            <thead>
+              <tr>
+                <th>Invoice / Order #</th>
+                <th>Date</th>
+                <th>Customer Name</th>
+                <th>Status</th>
+                <th>Amount</th>
+                <th style="text-align: right;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="portal-orders-tbody">
+              <!-- Rendered by store.js -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 5. Backup & PIN -->
+        <div class="portal-view" id="tab-portal-backup">
+          <div style="max-width: 600px; display: flex; flex-direction: column; gap: 20px;">
+            <div style="background: #fff; padding: 20px; border-radius: 6px; border: 1px solid var(--parchment-300);">
+              <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: var(--moss-900); margin-bottom: 8px;">
+                💾 Save / Backup Catalog to Your Computer
+              </h4>
+              <p style="font-size: 0.82rem; color: #666; margin-bottom: 14px;">
+                Download a safety backup copy of all your products, pricing, soap formulations, and orders with one click.
+              </p>
+              <button class="btn-primary" onclick="window.ApothecaryStore.downloadCatalogBackup()">
+                📥 Download Backup File (.json)
+              </button>
+            </div>
+
+            <div style="background: #fff; padding: 20px; border-radius: 6px; border: 1px solid var(--parchment-300);">
+              <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: var(--moss-900); margin-bottom: 8px;">
+                📤 Restore Catalog From Backup
+              </h4>
+              <p style="font-size: 0.82rem; color: #666; margin-bottom: 14px;">
+                If you ever switch phones or computers, load your backup file here to restore all your products immediately.
+              </p>
+              <input type="file" accept=".json" onchange="window.ApothecaryStore.restoreCatalogBackup(this)" style="font-size: 0.85rem;" />
+            </div>
+
+            <div style="background: #fff; padding: 20px; border-radius: 6px; border: 1px solid var(--parchment-300);">
+              <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: var(--moss-900); margin-bottom: 8px;">
+                🔑 Change Merchant Portal PIN
+              </h4>
+              <p style="font-size: 0.82rem; color: #666; margin-bottom: 14px;">
+                Current default PIN is <strong>1894</strong>. You can change this to your own private 4-digit code.
+              </p>
+              <button class="btn-secondary" style="background: var(--moss-800); color: #fff;" onclick="window.ApothecaryStore.changeOwnerPin()">
+                Change PIN
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Add / Edit Product Modal (For Owner) ──────────────────────────────── -->
+  <div class="modal-overlay" id="portal-edit-product-modal" onclick="if(event.target===this) window.ApothecaryStore.closeEditProductModal()">
+    <div class="modal-card" style="width: 720px;">
+      <div class="modal-header">
+        <h3 id="portal-form-title">Add New Remedy or Soap Bar</h3>
+        <button class="modal-close" onclick="window.ApothecaryStore.closeEditProductModal()">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="portal-form-grid">
+          <!-- Left Column: Photo Upload -->
+          <div>
+            <label class="form-label">Product Photo / Vessel Artwork</label>
+            <div class="image-upload-box" onclick="document.getElementById('portal-file-input').click()">
+              <img id="portal-image-preview" src="assets/soap.svg" class="image-preview-thumb" alt="Preview">
+              <div style="font-size: 0.8rem; font-weight: 600; color: var(--moss-900); margin-top: 6px;">
+                📸 Snap / Upload Photo from Device
+              </div>
+              <div style="font-size: 0.72rem; color: #777;">Click to select JPG, PNG, or WebP</div>
+              <input type="file" id="portal-file-input" accept="image/*" style="display: none;" onchange="window.ApothecaryStore.handleProductPhotoUpload(this)" />
+            </div>
+
+            <div style="margin-top: 12px;">
+              <span style="font-size: 0.72rem; text-transform: uppercase; color: #666; font-weight: 600; display: block; margin-bottom: 6px;">Or Choose an Artisan Icon:</span>
+              <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                <button type="button" class="btn-tag" onclick="window.ApothecaryStore.setPresetImage('assets/soap.svg')">🧼 Soap Bar</button>
+                <button type="button" class="btn-tag" onclick="window.ApothecaryStore.setPresetImage('assets/salve.svg')">🍯 Salve Jar</button>
+                <button type="button" class="btn-tag" onclick="window.ApothecaryStore.setPresetImage('assets/tincture.svg')">💧 Dropper</button>
+                <button type="button" class="btn-tag" onclick="window.ApothecaryStore.setPresetImage('assets/tea.svg')">☕ Tea Tin</button>
+                <button type="button" class="btn-tag" onclick="window.ApothecaryStore.setPresetImage('assets/bundle.svg')">🌿 Herb Bundle</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Details -->
+          <div>
+            <div class="form-group">
+              <label class="form-label">Product / Soap Title</label>
+              <input type="text" id="portal-prod-title" class="form-ctrl" placeholder="e.g. Lavender &amp; Goat Milk Soap Bar" required />
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+              <div class="form-group">
+                <label class="form-label">Category</label>
+                <select id="portal-prod-category" class="form-ctrl">
+                  <option value="Soaps &amp; Bars">Soaps &amp; Bars</option>
+                  <option value="Tinctures">Tinctures &amp; Elixirs</option>
+                  <option value="Salves &amp; Balms">Salves &amp; Balms</option>
+                  <option value="Teas &amp; Infusions">Teas &amp; Infusions</option>
+                  <option value="Botanicals">Botanicals &amp; Oils</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">SKU (Stock ID)</label>
+                <input type="text" id="portal-prod-sku" class="form-ctrl" placeholder="AC-SOP-008" />
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
+              <div class="form-group">
+                <label class="form-label">Regular Price ($)</label>
+                <input type="number" step="0.5" id="portal-prod-price" class="form-ctrl" value="12.00" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Sale Price ($)</label>
+                <input type="number" step="0.5" id="portal-prod-compare" class="form-ctrl" placeholder="Optional" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Stock Units</label>
+                <input type="number" id="portal-prod-stock" class="form-ctrl" value="24" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Weight / Vessel Size</label>
+              <input type="text" id="portal-prod-size" class="form-ctrl" placeholder="e.g. 5.5 oz bar" value="5.5 oz rustic bar" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Botanical Description</label>
+              <textarea id="portal-prod-desc" class="form-ctrl" rows="2" placeholder="Describe the skin feel, aroma, and botanical benefits..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Botanical Ingredients</label>
+              <textarea id="portal-prod-ingredients" class="form-ctrl" rows="2" placeholder="List oils, milks, botanicals, and essential oils..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Suggested Ritual / Usage</label>
+              <textarea id="portal-prod-usage" class="form-ctrl" rows="2" placeholder="How to use or care for this item..."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="window.ApothecaryStore.closeEditProductModal()">Cancel</button>
+        <button class="btn-primary" onclick="window.ApothecaryStore.saveProductFromPortal()">Save &amp; Publish to Store 🌿</button>
       </div>
     </div>
   </div>

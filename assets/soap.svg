@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <rect width="100%" height="100%" fill="#1a2620"/>
+  <circle cx="200" cy="200" r="150" fill="#22332a" stroke="#b68b32" stroke-width="1.5" stroke-dasharray="8 4"/>
+  <circle cx="200" cy="200" r="135" fill="#16231c"/>
+  
+  <!-- Soap Bar Shadow & 3D bevel -->
+  <rect x="125" y="160" width="160" height="120" rx="16" fill="#8c6a38"/>
+  <!-- Soap Bar Front Body (Rustic Oatmeal & Honey Color) -->
+  <rect x="120" y="145" width="160" height="120" rx="16" fill="#d9b166" stroke="#f0cf85" stroke-width="2"/>
+  
+  <!-- Soap Texture specks (Oatmeal & botanicals) -->
+  <circle cx="140" cy="170" r="3" fill="#875c20"/>
+  <circle cx="165" cy="185" r="2.5" fill="#875c20"/>
+  <circle cx="150" cy="210" r="3.5" fill="#875c20"/>
+  <circle cx="250" cy="175" r="3" fill="#875c20"/>
+  <circle cx="230" cy="200" r="2" fill="#875c20"/>
+  <circle cx="245" cy="235" r="3" fill="#875c20"/>
+  <circle cx="180" cy="245" r="2.5" fill="#875c20"/>
+  
+  <!-- Parchment Paper Wrap Band around Soap -->
+  <rect x="165" y="145" width="70" height="120" fill="#f5ede0" stroke="#b68b32" stroke-width="1"/>
+  <line x1="165" y1="150" x2="235" y2="150" stroke="#c2983b" stroke-width="1"/>
+  <line x1="165" y1="260" x2="235" y2="260" stroke="#c2983b" stroke-width="1"/>
+  
+  <!-- Brand stamp on wrap -->
+  <text x="200" y="180" text-anchor="middle" font-family="serif" font-size="8.5" font-weight="bold" fill="#1a2620">HONEY &amp; OAT</text>
+  <text x="200" y="195" text-anchor="middle" font-family="serif" font-size="7" fill="#6d3916">ARTISAN SOAP</text>
+  <!-- Botanical sprig stamp -->
+  <path d="M200 205 Q205 215 200 225 Q195 215 200 205" fill="#4e7f60"/>
+  <circle cx="200" cy="205" r="2" fill="#d8b257"/>
+  <text x="200" y="245" text-anchor="middle" font-family="monospace" font-size="6" fill="#444">5.5 OZ • RAW MILK</text>
+
+  <!-- Honeycomb hexagonal accents -->
+  <polygon points="295,130 310,122 325,130 325,146 310,154 295,146" fill="none" stroke="#d8a838" stroke-width="1.5" opacity="0.7"/>
+  <polygon points="310,154 325,146 340,154 340,170 325,178 310,170" fill="none" stroke="#d8a838" stroke-width="1.5" opacity="0.7"/>
+</svg>

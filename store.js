@@ -37,6 +37,24 @@
   // ── Default Product Catalog ───────────────────────────────────────────────
   const DEFAULT_PRODUCTS = [
     {
+      id: "prod-honey-oat-soap",
+      sku: "AC-SOP-007",
+      title: "Raw Honey & Colloidal Oat Herbal Soap Bar",
+      category: "Soaps & Bars",
+      categorySlug: "soaps",
+      size: "5.5 oz rustic bar",
+      price: 12.00,
+      comparePrice: 14.00,
+      stock: 28,
+      lowStockThreshold: 8,
+      image: "assets/soap.svg",
+      description: "Cold-processed botanical soap made with farm-fresh goat's milk, unpasteurized Appalachian wildflower honey, and finely milled colloidal oats to gently soothe sensitive and dry skin.",
+      ingredients: "Saponified oils of Olive, Coconut & Sustainable Palm, Raw Goat Milk, Raw Appalachian Wildflower Honey, Organic Colloidal Oatmeal, Sweet Orange & Bergamot Essential Oils.",
+      usage: "Lather between warm palms or on a natural sea sponge, cleanse skin gently, and place on a well-draining wooden soap deck between washes to extend bar longevity.",
+      badge: "Fresh Batch"
+    },
+
+    {
       id: "prod-reishi-elder",
       sku: "AC-ELX-001",
       title: "Wild Forest Reishi & Elderberry Elixir",
@@ -756,6 +774,572 @@
   }
 
   // ── Public Export ─────────────────────────────────────────────────────────
+
+  // ── Merchant / Herbalist Portal & POS Engine ──────────────────────────────
+  let portalState = {
+    activeTab: "tab-portal-products",
+    ownerPin: localStorage.getItem("apothecary_pin") || "1894",
+    editingProductId: null,
+    tempImageDataUrl: null,
+    posCart: []
+  };
+
+  function openOwnerPortal() {
+    const enteredPin = prompt("🌿 The Apothecary's Cabinet — Merchant Portal\nEnter your 4-digit Herbalist PIN (Default: 1894):");
+    if (!enteredPin) return;
+
+    if (enteredPin !== portalState.ownerPin) {
+      alert("Incorrect PIN. Access to Merchant Portal denied.");
+      return;
+    }
+
+    const modal = $("#owner-portal-modal");
+    if (modal) {
+      modal.classList.add("open");
+      showPortalTab("tab-portal-products");
+      renderPortalProducts();
+      renderPortalPos();
+      renderPortalPromos();
+      renderPortalOrders();
+    }
+  }
+
+  function closeOwnerPortal() {
+    const modal = $("#owner-portal-modal");
+    if (modal) modal.classList.remove("open");
+  }
+
+  function showPortalTab(tabId) {
+    portalState.activeTab = tabId;
+    $$(".portal-tab-btn").forEach(btn => btn.classList.toggle("active", btn.dataset.tab === tabId));
+    $$(".portal-view").forEach(v => v.classList.toggle("active", v.id === tabId));
+
+    if (tabId === "tab-portal-products") renderPortalProducts();
+    if (tabId === "tab-portal-pos") renderPortalPos();
+    if (tabId === "tab-portal-promos") renderPortalPromos();
+    if (tabId === "tab-portal-orders") renderPortalOrders();
+  }
+
+  // ── Product & Soap Management (For the Owner) ────────────────────────────
+  function renderPortalProducts() {
+    const tbody = $("#portal-products-tbody");
+    if (!tbody) return;
+
+    tbody.innerHTML = state.products.map(p => `
+      <tr>
+        <td><img src="${p.image}" style="width: 44px; height: 44px; object-fit: contain; background: #14241b; border-radius: 4px; padding: 2px;"></td>
+        <td>
+          <strong>${p.title}</strong><br>
+          <span style="font-size: 11px; color: #666;">${p.category} • ${p.size}</span>
+        </td>
+        <td style="font-family: monospace;">${p.sku}</td>
+        <td><strong>$${p.price.toFixed(2)}</strong> ${p.comparePrice ? `<s style="font-size: 11px; color: #888;">$${p.comparePrice.toFixed(2)}</s>` : ''}</td>
+        <td>
+          <span class="badge" style="background: ${p.stock > p.lowStockThreshold ? '#2e7d4a' : '#b83c2a'}; color: #fff; padding: 2px 6px; border-radius: 3px; font-size: 11px;">
+            ${p.stock} in stock
+          </span>
+          <button onclick="window.ApothecaryStore.quickRestock('${p.id}', 10)" class="btn-tag" style="margin-left: 6px; padding: 2px 6px;" title="Add 10 units">+10</button>
+        </td>
+        <td style="text-align: right;">
+          <button class="btn-tag" onclick="window.ApothecaryStore.editProductModal('${p.id}')">Edit</button>
+          <button class="btn-tag danger" onclick="window.ApothecaryStore.deleteProductFromPortal('${p.id}')">✕</button>
+        </td>
+      </tr>
+    `).join("");
+  }
+
+  function quickRestock(productId, amount) {
+    const prod = state.products.find(p => p.id === productId);
+    if (!prod) return;
+    prod.stock += amount;
+    saveState();
+    renderCatalog();
+    renderPortalProducts();
+    renderPortalPos();
+  }
+
+  function openCreateProductForm() {
+    portalState.editingProductId = null;
+    portalState.tempImageDataUrl = null;
+
+    $("#portal-form-title").textContent = "Add New Remedy or Soap Bar";
+    $("#portal-prod-title").value = "";
+    $("#portal-prod-category").value = "Soaps & Bars";
+    $("#portal-prod-sku").value = `AC-${Math.floor(100 + Math.random() * 900)}`;
+    $("#portal-prod-size").value = "5.5 oz bar";
+    $("#portal-prod-price").value = "12.00";
+    $("#portal-prod-compare").value = "";
+    $("#portal-prod-stock").value = "24";
+    $("#portal-prod-desc").value = "";
+    $("#portal-prod-ingredients").value = "";
+    $("#portal-prod-usage").value = "";
+    $("#portal-image-preview").src = "assets/soap.svg";
+
+    const modal = $("#portal-edit-product-modal");
+    if (modal) modal.classList.add("open");
+  }
+
+  function editProductModal(productId) {
+    const prod = state.products.find(p => p.id === productId);
+    if (!prod) return;
+
+    portalState.editingProductId = prod.id;
+    portalState.tempImageDataUrl = prod.image;
+
+    $("#portal-form-title").textContent = `Edit Formulation: ${prod.title}`;
+    $("#portal-prod-title").value = prod.title;
+    $("#portal-prod-category").value = prod.category;
+    $("#portal-prod-sku").value = prod.sku;
+    $("#portal-prod-size").value = prod.size;
+    $("#portal-prod-price").value = prod.price;
+    $("#portal-prod-compare").value = prod.comparePrice || "";
+    $("#portal-prod-stock").value = prod.stock;
+    $("#portal-prod-desc").value = prod.description;
+    $("#portal-prod-ingredients").value = prod.ingredients;
+    $("#portal-prod-usage").value = prod.usage;
+    $("#portal-image-preview").src = prod.image;
+
+    const modal = $("#portal-edit-product-modal");
+    if (modal) modal.classList.add("open");
+  }
+
+  function closeEditProductModal() {
+    const modal = $("#portal-edit-product-modal");
+    if (modal) modal.classList.remove("open");
+  }
+
+  function handleProductPhotoUpload(input) {
+    if (!input.files || !input.files[0]) return;
+    const file = input.files[0];
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const img = new Image();
+      img.onload = function () {
+        // Compress to compact dimensions (max 480x480) for storage
+        const canvas = document.createElement("canvas");
+        const maxDim = 480;
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+          if (width > maxDim) {
+            height *= maxDim / width;
+            width = maxDim;
+          }
+        } else {
+          if (height > maxDim) {
+            width *= maxDim / height;
+            height = maxDim;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, width, height);
+
+        const compressed = canvas.toDataURL("image/jpeg", 0.85);
+        portalState.tempImageDataUrl = compressed;
+        $("#portal-image-preview").src = compressed;
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function setPresetImage(assetPath) {
+    portalState.tempImageDataUrl = assetPath;
+    $("#portal-image-preview").src = assetPath;
+  }
+
+  function saveProductFromPortal() {
+    const title = $("#portal-prod-title").value.trim();
+    if (!title) {
+      alert("Please enter a title for this soap or remedy.");
+      return;
+    }
+
+    const category = $("#portal-prod-category").value.trim() || "Soaps & Bars";
+    const sku = $("#portal-prod-sku").value.trim() || `AC-PR-${Date.now().toString().slice(-4)}`;
+    const size = $("#portal-prod-size").value.trim() || "Unit";
+    const price = parseFloat($("#portal-prod-price").value) || 12.00;
+    const compareVal = $("#portal-prod-compare").value.trim();
+    const comparePrice = compareVal ? parseFloat(compareVal) : null;
+    const stock = parseInt($("#portal-prod-stock").value, 10) || 0;
+    const desc = $("#portal-prod-desc").value.trim();
+    const ingredients = $("#portal-prod-ingredients").value.trim();
+    const usage = $("#portal-prod-usage").value.trim();
+    const image = portalState.tempImageDataUrl || "assets/soap.svg";
+    const catSlug = category.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+    if (portalState.editingProductId) {
+      // Update existing
+      const prod = state.products.find(p => p.id === portalState.editingProductId);
+      if (prod) {
+        prod.title = title;
+        prod.category = category;
+        prod.categorySlug = catSlug;
+        prod.sku = sku;
+        prod.size = size;
+        prod.price = price;
+        prod.comparePrice = comparePrice;
+        prod.stock = stock;
+        prod.description = desc;
+        prod.ingredients = ingredients;
+        prod.usage = usage;
+        prod.image = image;
+      }
+    } else {
+      // Create new
+      const newProd = {
+        id: "prod-" + Date.now(),
+        sku,
+        title,
+        category,
+        categorySlug: catSlug,
+        size,
+        price,
+        comparePrice,
+        stock,
+        lowStockThreshold: 6,
+        image,
+        description: desc,
+        ingredients,
+        usage,
+        badge: "Handcrafted"
+      };
+      state.products.unshift(newProd);
+    }
+
+    saveState();
+    renderCatalog();
+    renderPortalProducts();
+    renderPortalPos();
+    closeEditProductModal();
+    alert(`✅ Successfully saved "${title}"!`);
+  }
+
+  function deleteProductFromPortal(productId) {
+    const prod = state.products.find(p => p.id === productId);
+    if (!prod) return;
+    if (!confirm(`Delete "${prod.title}" from the apothecary catalog?`)) return;
+
+    state.products = state.products.filter(p => p.id !== productId);
+    saveState();
+    renderCatalog();
+    renderPortalProducts();
+    renderPortalPos();
+  }
+
+  // ── Counter Point-of-Sale (POS Register) ──────────────────────────────────
+  function renderPortalPos() {
+    const grid = $("#pos-catalog-grid");
+    if (!grid) return;
+
+    grid.innerHTML = state.products.map(p => `
+      <div class="pos-card" onclick="window.ApothecaryStore.posAddItem('${p.id}')">
+        <img src="${p.image}" alt="${p.title}">
+        <div class="pos-card-title">${p.title}</div>
+        <div style="font-size: 10px; color: #666; margin-bottom: 2px;">${p.stock} left</div>
+        <div class="pos-card-price">$${p.price.toFixed(2)}</div>
+      </div>
+    `).join("");
+
+    renderPosTicket();
+  }
+
+  function posAddItem(productId) {
+    const prod = state.products.find(p => p.id === productId);
+    if (!prod) return;
+    if (prod.stock <= 0) {
+      alert("This item has zero stock recorded.");
+      return;
+    }
+
+    const existing = portalState.posCart.find(i => i.id === productId);
+    if (existing) {
+      if (existing.quantity >= prod.stock) {
+        alert("Maximum stock reached in counter register.");
+        return;
+      }
+      existing.quantity += 1;
+    } else {
+      portalState.posCart.push({ id: productId, quantity: 1 });
+    }
+
+    renderPosTicket();
+  }
+
+  function posUpdateQty(productId, delta) {
+    const item = portalState.posCart.find(i => i.id === productId);
+    if (!item) return;
+    item.quantity += delta;
+    if (item.quantity <= 0) {
+      portalState.posCart = portalState.posCart.filter(i => i.id !== productId);
+    }
+    renderPosTicket();
+  }
+
+  function renderPosTicket() {
+    const list = $("#pos-ticket-items");
+    if (!list) return;
+
+    if (portalState.posCart.length === 0) {
+      list.innerHTML = `<div style="text-align: center; color: #888; padding: 30px 10px; font-style: italic;">Tap any product to add to register ticket</div>`;
+      $("#pos-total").textContent = "$0.00";
+      return;
+    }
+
+    let subtotal = 0;
+    list.innerHTML = portalState.posCart.map(item => {
+      const prod = state.products.find(p => p.id === item.id);
+      if (!prod) return "";
+      const lineTotal = prod.price * item.quantity;
+      subtotal += lineTotal;
+      return `
+        <div class="pos-ticket-row">
+          <div style="flex: 1; padding-right: 6px;">
+            <strong>${prod.title}</strong><br>
+            <span style="font-size: 11px; color: #666;">$${prod.price.toFixed(2)} each</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <button class="qty-btn" onclick="window.ApothecaryStore.posUpdateQty('${prod.id}', -1)">-</button>
+            <span style="font-weight: bold; width: 16px; text-align: center;">${item.quantity}</span>
+            <button class="qty-btn" onclick="window.ApothecaryStore.posUpdateQty('${prod.id}', 1)">+</button>
+            <span style="font-weight: bold; min-width: 50px; text-align: right;">$${lineTotal.toFixed(2)}</span>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    const tax = subtotal * state.config.taxRate;
+    const total = subtotal + tax;
+
+    $("#pos-subtotal").textContent = `$${subtotal.toFixed(2)}`;
+    $("#pos-tax").textContent = `$${tax.toFixed(2)}`;
+    $("#pos-total").textContent = `$${total.toFixed(2)}`;
+  }
+
+  function posCheckout(paymentMethod = "Cash") {
+    if (portalState.posCart.length === 0) {
+      alert("Ticket is empty.");
+      return;
+    }
+
+    let subtotal = 0;
+    const lineItems = portalState.posCart.map(item => {
+      const prod = state.products.find(p => p.id === item.id);
+      const lineTotal = prod.price * item.quantity;
+      subtotal += lineTotal;
+      // deduct stock
+      prod.stock = Math.max(0, prod.stock - item.quantity);
+      return {
+        id: prod.id,
+        sku: prod.sku,
+        title: prod.title,
+        size: prod.size,
+        price: prod.price,
+        quantity: item.quantity,
+        total: lineTotal
+      };
+    });
+
+    const tax = subtotal * state.config.taxRate;
+    const grandTotal = subtotal + tax;
+    const now = new Date();
+    const orderNumber = `POS-${now.getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+
+    const order = {
+      orderNumber,
+      date: now.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" }),
+      timestamp: now.toISOString(),
+      customer: {
+        name: "Apothecary Counter Walk-In",
+        email: "storefront-pos@apothecaryscabinet.com",
+        address: "Storefront Counter, Suite B",
+        city: "Asheville",
+        state: "NC",
+        zip: "28801",
+        country: "USA"
+      },
+      items: lineItems,
+      pricing: {
+        subtotal,
+        discount: 0,
+        shipping: 0,
+        tax,
+        grandTotal
+      },
+      payment: {
+        method: `In-Store ${paymentMethod}`,
+        status: "PAID",
+        transactionId: `POS-${Date.now().toString().slice(-6)}`
+      },
+      notes: "Handcrafted in-store sale. Thank you for visiting our apothecary."
+    };
+
+    state.orders.unshift(order);
+    portalState.posCart = [];
+    saveState();
+
+    renderCatalog();
+    renderPortalProducts();
+    renderPortalPos();
+    renderPortalOrders();
+
+    // Show receipt
+    showInvoiceModal(order);
+  }
+
+  // ── Promotions & Sales Management ─────────────────────────────────────────
+  function renderPortalPromos() {
+    const list = $("#portal-promos-tbody");
+    if (!list) return;
+
+    const promoEntries = Object.entries(state.config.promoCodes);
+    list.innerHTML = promoEntries.map(([code, p]) => `
+      <tr>
+        <td><strong style="font-family: monospace; color: var(--moss-900);">${code}</strong></td>
+        <td>${p.label}</td>
+        <td>${p.type === 'percent' ? p.value + '% Off' : 'Free Shipping'}</td>
+        <td style="text-align: right;">
+          <button class="btn-tag danger" onclick="window.ApothecaryStore.deletePromoCode('${code}')">Delete</button>
+        </td>
+      </tr>
+    `).join("");
+
+    // Announcement text
+    const bannerInput = $("#portal-announcement-input");
+    if (bannerInput && state.config.announcement) {
+      bannerInput.value = state.config.announcement;
+    }
+  }
+
+  function saveAnnouncementFromPortal() {
+    const text = $("#portal-announcement-input").value.trim();
+    if (!text) return;
+    state.config.announcement = text;
+    saveState();
+
+    // Update banner on page
+    const noticeEl = $(".top-notice span:first-child");
+    if (noticeEl) noticeEl.innerHTML = `🌿 ${text}`;
+    alert("Live store announcement banner updated!");
+  }
+
+  function addPromoCodeFromPortal() {
+    const code = $("#new-promo-code").value.trim().toUpperCase();
+    const type = $("#new-promo-type").value;
+    const value = parseFloat($("#new-promo-val").value) || 10;
+    const label = $("#new-promo-label").value.trim() || `${code} Special`;
+
+    if (!code) {
+      alert("Please provide a promo code name.");
+      return;
+    }
+
+    state.config.promoCodes[code] = {
+      type,
+      value,
+      label
+    };
+
+    saveState();
+    renderPortalPromos();
+    $("#new-promo-code").value = "";
+    $("#new-promo-label").value = "";
+    alert(`Promo code ${code} activated! Customers can now use it at checkout.`);
+  }
+
+  function deletePromoCode(code) {
+    delete state.config.promoCodes[code];
+    saveState();
+    renderPortalPromos();
+  }
+
+  // ── Orders & Invoices in Portal ───────────────────────────────────────────
+  function renderPortalOrders() {
+    const tbody = $("#portal-orders-tbody");
+    if (!tbody) return;
+
+    if (state.orders.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #777; padding: 24px;">No customer orders placed yet.</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = state.orders.map(o => `
+      <tr>
+        <td><strong style="font-family: monospace;">${o.orderNumber}</strong></td>
+        <td>${o.date}</td>
+        <td>${o.customer.name}</td>
+        <td><span class="badge" style="background: #14241b; color: #d8b056; padding: 2px 6px; border-radius: 3px; font-size: 11px;">${o.payment.status}</span></td>
+        <td style="font-weight: bold;">$${o.pricing.grandTotal.toFixed(2)}</td>
+        <td style="text-align: right;">
+          <button class="btn-tag" onclick="window.ApothecaryStore.viewOrder('${o.orderNumber}')">View Receipt</button>
+        </td>
+      </tr>
+    `).join("");
+  }
+
+  // ── Backup & PIN Settings ─────────────────────────────────────────────────
+  function downloadCatalogBackup() {
+    const data = {
+      version: "1.0",
+      timestamp: new Date().toISOString(),
+      products: state.products,
+      config: state.config,
+      orders: state.orders
+    };
+
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `Apothecary_Cabinet_Backup_${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+
+  function restoreCatalogBackup(input) {
+    if (!input.files || !input.files[0]) return;
+    const file = input.files[0];
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      try {
+        const data = JSON.parse(e.target.result);
+        if (data.products) state.products = data.products;
+        if (data.config) state.config = data.config;
+        if (data.orders) state.orders = data.orders;
+        saveState();
+        renderCatalog();
+        renderPortalProducts();
+        renderPortalPos();
+        renderPortalPromos();
+        renderPortalOrders();
+        alert("✅ Inventory and settings successfully restored from backup!");
+      } catch (err) {
+        alert("Invalid backup file: " + err.message);
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  function changeOwnerPin() {
+    const current = prompt("Enter current PIN:");
+    if (current !== portalState.ownerPin) {
+      alert("Current PIN does not match.");
+      return;
+    }
+    const newPin = prompt("Enter new 4-digit PIN:");
+    if (!newPin || newPin.length < 4) {
+      alert("PIN must be at least 4 digits.");
+      return;
+    }
+    portalState.ownerPin = newPin;
+    localStorage.setItem("apothecary_pin", newPin);
+    alert("✅ Owner PIN updated successfully!");
+  }
+
   window.ApothecaryStore = {
     addToCart,
     updateCartQuantity,
@@ -774,6 +1358,26 @@
     openOrdersLedger,
     closeOrdersLedger,
     viewOrder,
+    openOwnerPortal,
+    closeOwnerPortal,
+    showPortalTab,
+    openCreateProductForm,
+    editProductModal,
+    closeEditProductModal,
+    saveProductFromPortal,
+    deleteProductFromPortal,
+    quickRestock,
+    handleProductPhotoUpload,
+    setPresetImage,
+    posAddItem,
+    posUpdateQty,
+    posCheckout,
+    addPromoCodeFromPortal,
+    deletePromoCode,
+    saveAnnouncementFromPortal,
+    downloadCatalogBackup,
+    restoreCatalogBackup,
+    changeOwnerPin,
     getState: () => state,
     setProducts: (newProds) => { state.products = newProds; saveState(); renderCatalog(); }
   };
