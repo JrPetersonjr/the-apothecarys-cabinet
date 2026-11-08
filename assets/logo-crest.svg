@@ -1,0 +1,33 @@
+<!-- Botanical Apothecary Crest / Logo -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <radialGradient id="goldGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f0d588" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#b68b32" stop-opacity="0.2"/>
+    </radialGradient>
+    <linearGradient id="herbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4e7f60"/>
+      <stop offset="100%" stop-color="#1f3d2b"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="92" fill="none" stroke="#b68b32" stroke-width="2.5" stroke-dasharray="6 3"/>
+  <circle cx="100" cy="100" r="84" fill="#14241b" stroke="#c9a24d" stroke-width="1.5"/>
+  <circle cx="100" cy="100" r="80" fill="none" stroke="#335c43" stroke-width="0.8"/>
+  
+  <!-- Mortar & Pestle & Botanical Leaf Motif -->
+  <path d="M72 115 C72 135 128 135 128 115 L124 105 L76 105 Z" fill="#b68b32" stroke="#f0d588" stroke-width="1.5"/>
+  <path d="M68 104 C68 100 132 100 132 104 C132 108 68 108 68 104 Z" fill="#d8b257"/>
+  <path d="M112 82 L126 62 C128 59 132 61 130 65 L118 88 Z" fill="#e5c573"/>
+  
+  <!-- Botanical Sprigs -->
+  <path d="M100 70 Q95 50 82 45 Q90 60 98 68" fill="#5fa375" stroke="#234a31" stroke-width="0.5"/>
+  <path d="M100 70 Q105 50 118 45 Q110 60 102 68" fill="#5fa375" stroke="#234a31" stroke-width="0.5"/>
+  <path d="M100 95 Q100 40 100 35" fill="none" stroke="#88b896" stroke-width="1.5"/>
+  <circle cx="100" cy="35" r="3.5" fill="#e5c573"/>
+  <circle cx="82" cy="45" r="2.5" fill="#d88444"/>
+  <circle cx="118" cy="45" r="2.5" fill="#d88444"/>
+
+  <!-- Apothecary Est text ring decoration -->
+  <path d="M55 152 Q100 166 145 152" fill="none" stroke="#c9a24d" stroke-width="1"/>
+  <text x="100" y="162" text-anchor="middle" font-family="serif" font-size="9" fill="#e0c070" letter-spacing="2">EST. 1894</text>
+</svg>

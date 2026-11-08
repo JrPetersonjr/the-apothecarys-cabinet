@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <rect width="100%" height="100%" fill="#1a2620"/>
+  <circle cx="200" cy="200" r="150" fill="#22332a" stroke="#b68b32" stroke-width="1.5" stroke-dasharray="8 4"/>
+  <circle cx="200" cy="200" r="135" fill="#16231c"/>
+  <!-- Amber Glass Jar -->
+  <rect x="135" y="165" width="130" height="110" rx="10" fill="#78421b" stroke="#c9a24d" stroke-width="2"/>
+  <!-- Metal Screw Lid -->
+  <rect x="130" y="135" width="140" height="32" rx="4" fill="#bfa15f" stroke="#e0c885" stroke-width="1.5"/>
+  <line x1="135" y1="145" x2="265" y2="145" stroke="#876b29" stroke-width="1"/>
+  <line x1="135" y1="155" x2="265" y2="155" stroke="#876b29" stroke-width="1"/>
+  <!-- Jar Label -->
+  <rect x="145" y="180" width="110" height="75" rx="3" fill="#f4ebd9" stroke="#96742a" stroke-width="1"/>
+  <text x="200" y="202" text-anchor="middle" font-family="serif" font-size="9" font-weight="bold" fill="#1a2620">ARNICA &amp; CALENDULA</text>
+  <text x="200" y="214" text-anchor="middle" font-family="serif" font-size="7" fill="#8d4a1b">SOOTHING MUSCLE BALM</text>
+  <circle cx="200" cy="230" r="8" fill="#e5a93b"/>
+  <text x="200" y="246" text-anchor="middle" font-family="monospace" font-size="6" fill="#444">60 GRAMS • ORGANIC</text>
+  <!-- Calendula flower deco -->
+  <circle cx="290" cy="180" r="16" fill="#d99026" opacity="0.8"/>
+  <circle cx="290" cy="180" r="8" fill="#733910"/>
+</svg>

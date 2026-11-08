@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Apothecary's Cabinet — Handcrafted Botanical Remedies</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="store.css">
+</head>
+<body>
+
+  <!-- Top Announcement Notice -->
+  <div class="top-notice">
+    <span>🌿 Free Botanical Ground Delivery on orders over $65.00</span>
+    <span>•</span>
+    <span>🍂 Use code <strong>HERBAL10</strong> for 10% off your first order</span>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <img src="assets/logo-crest.svg" alt="The Apothecary's Cabinet Crest" class="brand-crest">
+        <div class="brand-titles">
+          <h1>The Apothecary's Cabinet</h1>
+          <div class="tagline">Botanical Remedies &amp; Handcrafted Tinctures</div>
+        </div>
+      </div>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#catalog" class="active">Remedies</a></li>
+          <li><a href="#story">Our Story</a></li>
+          <li><a href="#philosophy">Ethos</a></li>
+          <li><a href="#contact">Contact &amp; Hours</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="studio.html" class="btn-header-action" title="Open WebStudio Admin Dashboard">
+          ⚙️ Studio Admin
+        </a>
+        <button class="btn-header-action" onclick="window.ApothecaryStore.openOrdersLedger()" title="View past invoices and orders">
+          🧾 Invoices &amp; Orders
+        </button>
+        <button class="cart-btn" onclick="window.ApothecaryStore.openCartDrawer()">
+          🛍️ Bag <span class="cart-badge" id="cart-badge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-tag">EST. 1894 • ASHEVILLE, NORTH CAROLINA</span>
+      <h2 class="hero-title">Handcrafted Botanical Remedies For Mind, Body &amp; Spirit</h2>
+      <p class="hero-subtitle">
+        Slow-infused herbal extracts, medicinal mushroom elixirs, and restorative salves crafted in small batches from organically wildcrafted mountain herbs.
+      </p>
+      <div class="hero-ctas">
+        <a href="#catalog" class="btn-primary">Browse The Formulations 🌿</a>
+        <a href="#story" class="btn-secondary">The Herbalist's Method</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ethos / Pillars Bar -->
+  <section class="top-notice" id="philosophy" style="background: var(--moss-800); padding: 14px 24px; font-size: 12px;">
+    <span>☀️ Solar-Steeped Herbalism</span>
+    <span>•</span>
+    <span>🌲 Ethically Wildcrafted Plants</span>
+    <span>•</span>
+    <span>🧪 Small-Batch Lab Certified</span>
+    <span>•</span>
+    <span>♻️ 100% Recyclable Amber Glass</span>
+  </section>
+
+  <!-- Main Catalog Controls -->
+  <section id="catalog" class="catalog-controls">
+    <div class="category-pills">
+      <button class="cat-pill active" data-cat="all">All Remedies</button>
+      <button class="cat-pill" data-cat="tinctures">Tinctures &amp; Elixirs</button>
+      <button class="cat-pill" data-cat="salves">Salves &amp; Balms</button>
+      <button class="cat-pill" data-cat="teas">Teas &amp; Infusions</button>
+      <button class="cat-pill" data-cat="botanicals">Botanicals &amp; Oils</button>
+    </div>
+
+    <div class="search-sort-group">
+      <input type="text" id="search-catalog" class="search-input" placeholder="Search herbs, remedies..." />
+      <select id="sort-catalog" class="sort-select">
+        <option value="featured">Featured Formulations</option>
+        <option value="price-low">Price: Low to High</option>
+        <option value="price-high">Price: High to Low</option>
+        <option value="name">Alphabetical</option>
+      </select>
+    </div>
+  </section>
+
+  <!-- Product Grid -->
+  <main class="catalog-container">
+    <div class="products-grid" id="products-grid">
+      <!-- Injected reactively by store.js -->
+    </div>
+  </main>
+
+  <!-- Story & Method Section -->
+  <section class="story-section" id="story">
+    <div class="story-inner">
+      <div class="story-content">
+        <h2>Ancient Wisdom for the Modern Cabinet</h2>
+        <p>
+          At <strong>The Apothecary's Cabinet</strong>, every tincture, tonic, and balm begins in the rich soil of the Blue Ridge Mountains. We harvest herbs in harmony with the lunar rhythms and botanical seasons to capture maximum medicinal potency.
+        </p>
+        <p>
+          No synthetic preservatives, artificial fragrances, or filler oils ever enter our bottles. Only pure mountain spring water, raw unpasteurized honey, and organic cane alcohol are used as our extraction mediums.
+        </p>
+        <div style="margin-top: 24px;">
+          <button class="btn-primary" onclick="window.scrollTo({top: document.getElementById('catalog').offsetTop - 60, behavior: 'smooth'})">
+            Discover Current Batches
+          </button>
+        </div>
+      </div>
+
+      <div class="story-badge-box">
+        <div class="badge-item">
+          <h5>Direct Botanical Sourcing</h5>
+          <p>Every plant ingredient is traced directly to local Appalachian foragers and organic family farms.</p>
+        </div>
+        <div class="badge-item">
+          <h5>Amber Glass Preservation</h5>
+          <p>Protected from UV degradation in pharmaceutical-grade cobalt and amber glass vessels.</p>
+        </div>
+        <div class="badge-item">
+          <h5>Zero Chemical Additives</h5>
+          <p>100% whole plant extractions without isolate chemicals or chemical binders.</p>
+        </div>
+        <div class="badge-item">
+          <h5>Third-Party Tested</h5>
+          <p>Independently tested for heavy metals, pesticides, and verified active plant constituents.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer" id="contact">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <h4>The Apothecary's Cabinet</h4>
+        <p style="margin-bottom: 12px;">Crafting herbal remedies and botanical wellness formulations since 1894.</p>
+        <p><strong>Storefront:</strong> 142 Whispering Pines Lane, Suite B, Asheville, NC 28801</p>
+        <p><strong>Apothecary Phone:</strong> (828) 555-HERB</p>
+        <p><strong>Email:</strong> remedies@apothecaryscabinet.com</p>
+      </div>
+
+      <div class="footer-col">
+        <h5>Remedies</h5>
+        <ul>
+          <li><a href="#catalog">Immune Elixirs</a></li>
+          <li><a href="#catalog">Herbal Tinctures</a></li>
+          <li><a href="#catalog">Botanical Salves</a></li>
+          <li><a href="#catalog">Loose Leaf Teas</a></li>
+          <li><a href="#catalog">Sanctuary Bundles</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Customer Care</h5>
+        <ul>
+          <li><a href="javascript:void(0)" onclick="window.ApothecaryStore.openOrdersLedger()">View Past Invoices</a></li>
+          <li><a href="#catalog">Shipping &amp; Delivery</a></li>
+          <li><a href="#story">Botanical Returns</a></li>
+          <li><a href="#story">Certificate of Analysis</a></li>
+          <li><a href="#contact">Consult an Herbalist</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Apothecary Hours</h5>
+        <p style="margin-bottom: 8px;"><strong>Monday – Friday:</strong><br>9:00 AM – 6:00 PM EST</p>
+        <p style="margin-bottom: 8px;"><strong>Saturday:</strong><br>10:00 AM – 4:00 PM EST</p>
+        <p><strong>Sunday:</strong> Foraging in the mountains</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 The Apothecary's Cabinet. All rights reserved.</div>
+      <div>Direct Selling &amp; Invoice Portal Powered by WebStudio</div>
+    </div>
+  </footer>
+
+  <!-- ── Cart Drawer ──────────────────────────────────────────────────────── -->
+  <div class="cart-overlay" id="cart-overlay" onclick="if(event.target===this) window.ApothecaryStore.closeCartDrawer()">
+    <div class="cart-drawer">
+      <div class="cart-header">
+        <h3>Your Remedy Bag</h3>
+        <button class="btn-close-cart" onclick="window.ApothecaryStore.closeCartDrawer()">✕</button>
+      </div>
+
+      <div class="cart-items-list" id="cart-items-list">
+        <!-- Rendered by store.js -->
+      </div>
+
+      <div class="cart-footer">
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="cart-subtotal">$0.00</span>
+        </div>
+        <div class="summary-row" style="color: var(--green-accent);">
+          <span>Herbal Discount</span>
+          <span id="cart-discount">-$0.00</span>
+        </div>
+        <div class="summary-row">
+          <span>Estimated Shipping</span>
+          <span id="cart-shipping">$5.50</span>
+        </div>
+        <div class="summary-row">
+          <span>Sales Tax (7%)</span>
+          <span id="cart-tax">$0.00</span>
+        </div>
+        <div class="summary-row total-row">
+          <span>Grand Total</span>
+          <span id="cart-grand-total">$0.00</span>
+        </div>
+
+        <div class="promo-row">
+          <input type="text" id="promo-code-input" class="promo-input" placeholder="Promo code (e.g. HERBAL10)" />
+          <button id="btn-apply-promo" class="btn-apply-promo">Apply</button>
+        </div>
+
+        <button class="btn-checkout-now" onclick="window.ApothecaryStore.openCheckoutModal()">
+          Secure Direct Checkout ➔
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Product Quick-View Modal ─────────────────────────────────────────── -->
+  <div class="modal-overlay" id="product-modal" onclick="if(event.target===this) window.ApothecaryStore.closeProductModal()">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-prod-title">Remedy Details</h3>
+        <button class="modal-close" onclick="window.ApothecaryStore.closeProductModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="checkout-grid">
+          <div style="background: var(--moss-900); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; overflow: hidden;">
+            <img id="modal-prod-img" src="" alt="Remedy" style="width: 100%; height: auto; max-height: 320px; object-fit: contain;">
+          </div>
+          <div>
+            <div id="modal-prod-sku" style="font-size: 0.75rem; font-family: var(--font-mono); color: #888; margin-bottom: 6px;"></div>
+            <div id="modal-prod-price" style="font-size: 1.6rem; font-family: var(--font-serif); font-weight: 700; color: var(--moss-900); margin-bottom: 12px;"></div>
+            <div id="modal-prod-stock" style="font-size: 0.8rem; font-weight: 700; color: var(--green-accent); margin-bottom: 14px;"></div>
+            
+            <p id="modal-prod-desc" style="font-size: 0.88rem; color: var(--ink-700); margin-bottom: 16px; line-height: 1.5;"></p>
+
+            <div style="margin-bottom: 14px;">
+              <strong style="font-size: 0.78rem; text-transform: uppercase; color: var(--gold-600); display: block; margin-bottom: 4px;">Botanical Ingredients:</strong>
+              <p id="modal-prod-ingredients" style="font-size: 0.82rem; color: var(--ink-900); background: var(--parchment-200); padding: 8px 12px; border-radius: 4px;"></p>
+            </div>
+
+            <div style="margin-bottom: 18px;">
+              <strong style="font-size: 0.78rem; text-transform: uppercase; color: var(--gold-600); display: block; margin-bottom: 4px;">Suggested Dosage &amp; Ritual:</strong>
+              <p id="modal-prod-usage" style="font-size: 0.82rem; color: var(--ink-700);"></p>
+            </div>
+
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <label style="font-size: 0.82rem; font-weight: 600;">Qty:</label>
+              <input type="number" id="modal-prod-qty" value="1" min="1" max="50" style="width: 60px; padding: 6px; border: 1px solid #ccc; border-radius: 4px; text-align: center;">
+              <button id="modal-prod-buy-btn" class="btn-primary" style="flex: 1; justify-content: center;">
+                Add To Bag
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Direct Checkout Modal ────────────────────────────────────────────── -->
+  <div class="modal-overlay" id="checkout-modal" onclick="if(event.target===this) window.ApothecaryStore.closeCheckoutModal()">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Secure Direct Checkout</h3>
+        <button class="modal-close" onclick="window.ApothecaryStore.closeCheckoutModal()">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="checkout-grid">
+          <!-- Left: Customer & Shipping Details -->
+          <div>
+            <div class="form-section-title">1. Customer &amp; Dispatch Details</div>
+            
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input type="text" id="cust-name" class="form-ctrl" placeholder="e.g. Eleanor Vance" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Email Address (For Invoice &amp; Tracking)</label>
+              <input type="email" id="cust-email" class="form-ctrl" placeholder="eleanor@botanicals.com" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Shipping / Delivery Address</label>
+              <input type="text" id="cust-address" class="form-ctrl" placeholder="124 Forest Creek Road" />
+            </div>
+
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 8px;">
+              <div class="form-group">
+                <label class="form-label">City</label>
+                <input type="text" id="cust-city" class="form-ctrl" placeholder="Asheville" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">State</label>
+                <input type="text" id="cust-state" class="form-ctrl" placeholder="NC" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Zip Code</label>
+                <input type="text" id="cust-zip" class="form-ctrl" placeholder="28801" />
+              </div>
+            </div>
+
+            <div class="form-section-title" style="margin-top: 14px;">2. Shipping Speed</div>
+            <div style="font-size: 0.85rem; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px;">
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <input type="radio" name="shipping-method" value="standard" checked />
+                <span>Standard Botanical Ground (3-5 days) — $5.50</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <input type="radio" name="shipping-method" value="express" />
+                <span>Expedited Herbal Courier (1-2 days) — $14.00</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <input type="radio" name="shipping-method" value="pickup" />
+                <span>Local Asheville Counter Pickup (Same-Day) — FREE</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Right: Payment Method & Totals -->
+          <div>
+            <div class="form-section-title">3. Payment Method</div>
+            
+            <div class="payment-tabs">
+              <button class="pay-tab-btn active" data-tab="tab-stripe">
+                <span>💳 Card / Stripe</span>
+              </button>
+              <button class="pay-tab-btn" data-tab="tab-paypal">
+                <span>🅿️ PayPal</span>
+              </button>
+              <button class="pay-tab-btn" data-tab="tab-pickup">
+                <span>🏬 In-Store Pay</span>
+              </button>
+            </div>
+
+            <!-- Stripe Card Tab -->
+            <div class="tab-pane active" id="tab-stripe">
+              <div class="form-group">
+                <label class="form-label">Card Number</label>
+                <input type="text" class="form-ctrl" placeholder="•••• •••• •••• 4242" value="4242 •••• •••• 4242" />
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                <div class="form-group">
+                  <label class="form-label">Expiration</label>
+                  <input type="text" class="form-ctrl" placeholder="MM/YY" value="08/29" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">CVC Security</label>
+                  <input type="text" class="form-ctrl" placeholder="CVC" value="842" />
+                </div>
+              </div>
+              <button class="btn-primary" style="width: 100%; justify-content: center; margin-top: 10px;" onclick="window.ApothecaryStore.processOrder('stripe')">
+                Pay With Card Now
+              </button>
+            </div>
+
+            <!-- PayPal Tab -->
+            <div class="tab-pane" id="tab-paypal">
+              <p style="font-size: 0.85rem; color: #555; margin-bottom: 14px;">
+                Complete your botanical order securely with your PayPal account or PayPal Pay Later.
+              </p>
+              <button class="btn-primary" style="width: 100%; justify-content: center; background: #0070ba; border-color: #003087; color: #fff;" onclick="window.ApothecaryStore.processOrder('paypal')">
+                Pay with PayPal ➔
+              </button>
+            </div>
+
+            <!-- Store Pickup Tab -->
+            <div class="tab-pane" id="tab-pickup">
+              <p style="font-size: 0.85rem; color: #555; margin-bottom: 14px;">
+                Reserve this order for in-person pickup at our Asheville store counter. You can pay via Cash, Card, or Apple Pay upon pickup.
+              </p>
+              <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="window.ApothecaryStore.processOrder('pickup')">
+                Reserve Order For Pickup
+              </button>
+            </div>
+
+            <div class="secure-badge">
+              <span>🔒 256-Bit SSL Encrypted Direct Transaction</span>
+            </div>
+
+            <!-- Summary in checkout -->
+            <div style="background: var(--parchment-200); padding: 14px; border-radius: var(--radius-sm); margin-top: 16px; border: 1px solid var(--parchment-300);">
+              <div class="summary-row"><span>Items Subtotal:</span> <span id="checkout-subtotal">$0.00</span></div>
+              <div class="summary-row"><span>Dispatch / Courier:</span> <span id="checkout-shipping">$5.50</span></div>
+              <div class="summary-row"><span>Sales Tax:</span> <span id="checkout-tax">$0.00</span></div>
+              <div class="summary-row total-row" style="margin-top: 6px; padding-top: 6px;">
+                <span>Total Amount:</span> <span id="checkout-grand-total">$0.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Printable Invoice & Receipt Modal ───────────────────────────────── -->
+  <div class="modal-overlay" id="invoice-modal" onclick="if(event.target===this) window.ApothecaryStore.closeInvoiceModal()">
+    <div class="modal-card" style="width: 840px;">
+      <div class="modal-header">
+        <h3>Order Receipt &amp; Official Invoice</h3>
+        <button class="modal-close" onclick="window.ApothecaryStore.closeInvoiceModal()">✕</button>
+      </div>
+
+      <div class="modal-body" style="background: #e7e3da; padding: 24px;">
+        <!-- Printable Paper Sheet -->
+        <div class="invoice-sheet" id="invoice-printable-sheet">
+          <div class="invoice-header">
+            <div class="invoice-brand">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+                <img src="assets/logo-crest.svg" alt="Crest" style="width: 40px; height: 40px;">
+                <h2>The Apothecary's Cabinet</h2>
+              </div>
+              <p>142 Whispering Pines Lane, Suite B<br>Asheville, NC 28801 • Tel: (828) 555-HERB<br>remedies@apothecaryscabinet.com</p>
+            </div>
+
+            <div class="invoice-meta">
+              <span class="invoice-badge" id="inv-number">AC-2026-000000</span>
+              <p><strong>Date:</strong> <span id="inv-date">Nov 8, 2026</span></p>
+              <p><strong>Status:</strong> <span id="inv-status-badge">PAID • Stripe</span></p>
+            </div>
+          </div>
+
+          <div class="invoice-parties">
+            <div class="party-block">
+              <h4>Billed &amp; Dispatched To</h4>
+              <p id="inv-cust-name">Eleanor Vance</p>
+              <p id="inv-cust-email">eleanor@botanicals.com</p>
+              <p id="inv-cust-address">124 Forest Creek Road, Asheville, NC 28801</p>
+            </div>
+
+            <div class="party-block">
+              <h4>Herbalist Fulfillment Note</h4>
+              <p>Hand-inspected, batch verified, and packed with biodegradable dried straw and wax seals. Store in a cool, dark sanctuary away from direct sunlight.</p>
+            </div>
+          </div>
+
+          <table class="invoice-table">
+            <thead>
+              <tr>
+                <th>Remedy Formulation / Description</th>
+                <th class="num">Qty</th>
+                <th class="num">Unit Price</th>
+                <th class="num">Line Total</th>
+              </tr>
+            </thead>
+            <tbody id="inv-items-tbody">
+              <!-- Line items injected dynamically -->
+            </tbody>
+          </table>
+
+          <div class="invoice-totals">
+            <table class="totals-table">
+              <tr>
+                <td>Subtotal:</td>
+                <td class="num" id="inv-subtotal">$0.00</td>
+              </tr>
+              <tr>
+                <td style="color: var(--green-accent);">Promotional Discount:</td>
+                <td class="num" style="color: var(--green-accent);" id="inv-discount">-$0.00</td>
+              </tr>
+              <tr>
+                <td>Herbal Ground Dispatch:</td>
+                <td class="num" id="inv-shipping">$0.00</td>
+              </tr>
+              <tr>
+                <td>Sales Tax (7.0%):</td>
+                <td class="num" id="inv-tax">$0.00</td>
+              </tr>
+              <tr class="grand-total">
+                <td>Total Paid:</td>
+                <td class="num" id="inv-grand-total">$0.00</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="invoice-footer">
+            <p>Thank you for supporting traditional small-batch Appalachian herbalism.</p>
+            <p style="margin-top: 4px; font-size: 0.72rem; color: #888;">
+              Questions about botanical dosages or returns? Email remedies@apothecaryscabinet.com with your invoice number.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer invoice-actions">
+        <button class="btn-secondary" onclick="window.ApothecaryStore.closeInvoiceModal()">Close</button>
+        <div style="display: flex; gap: 10px;">
+          <button class="btn-secondary" onclick="window.ApothecaryStore.downloadInvoiceHtml()">
+            💾 Download HTML Receipt
+          </button>
+          <button class="btn-primary" onclick="window.ApothecaryStore.printInvoice()">
+            🖨️ Print Receipt / PDF
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Orders Ledger Modal ──────────────────────────────────────────────── -->
+  <div class="modal-overlay" id="orders-ledger-modal" onclick="if(event.target===this) window.ApothecaryStore.closeOrdersLedger()">
+    <div class="modal-card" style="width: 800px;">
+      <div class="modal-header">
+        <h3>Customer Orders &amp; Invoice History</h3>
+        <button class="modal-close" onclick="window.ApothecaryStore.closeOrdersLedger()">✕</button>
+      </div>
+      <div class="modal-body">
+        <table class="invoice-table">
+          <thead>
+            <tr>
+              <th>Invoice #</th>
+              <th>Date</th>
+              <th>Customer</th>
+              <th>Status</th>
+              <th class="num">Amount</th>
+              <th style="text-align: right;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="orders-ledger-tbody">
+            <!-- Orders injected by store.js -->
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="window.ApothecaryStore.closeOrdersLedger()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Store Logic -->
+  <script src="store.js"></script>
+</body>
+</html>

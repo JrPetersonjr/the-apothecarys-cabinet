@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <rect width="100%" height="100%" fill="#1a2620"/>
+  <circle cx="200" cy="200" r="150" fill="#22332a" stroke="#b68b32" stroke-width="1.5" stroke-dasharray="8 4"/>
+  <circle cx="200" cy="200" r="135" fill="#16231c"/>
+  <!-- Bottle Shape -->
+  <rect x="155" y="145" width="90" height="150" rx="14" fill="#6d3916" stroke="#c9a24d" stroke-width="2"/>
+  <!-- Bottle Neck & Cap -->
+  <rect x="180" y="105" width="40" height="40" rx="4" fill="#522a10" stroke="#c9a24d" stroke-width="1.5"/>
+  <rect x="175" y="90" width="50" height="18" rx="3" fill="#1d1e1c" stroke="#d5b364" stroke-width="1.5"/>
+  <ellipse cx="200" cy="85" rx="16" ry="10" fill="#151515"/>
+  <!-- Label on bottle -->
+  <rect x="162" y="165" width="76" height="100" rx="4" fill="#f4ebd9" stroke="#96742a" stroke-width="1"/>
+  <line x1="168" y1="172" x2="232" y2="172" stroke="#b68b32" stroke-width="1"/>
+  <text x="200" y="190" text-anchor="middle" font-family="serif" font-size="9" font-weight="bold" fill="#1a2620">REISHI &amp; ELDER</text>
+  <text x="200" y="202" text-anchor="middle" font-family="serif" font-size="7" fill="#6d3916">IMMUNE ELIXIR</text>
+  <circle cx="200" cy="220" r="10" fill="none" stroke="#2a4734" stroke-width="1"/>
+  <path d="M200 214 Q204 220 200 226 Q196 220 200 214" fill="#2a4734"/>
+  <text x="200" y="246" text-anchor="middle" font-family="monospace" font-size="6" fill="#444">120 ML • 4 FL OZ</text>
+  <line x1="168" y1="256" x2="232" y2="256" stroke="#b68b32" stroke-width="1"/>
+  <!-- Botanical Sprig on background -->
+  <path d="M120 290 Q150 240 140 180" fill="none" stroke="#5d8b6c" stroke-width="2"/>
+  <circle cx="135" cy="205" r="5" fill="#7a2e3a"/>
+  <circle cx="145" cy="225" r="5" fill="#7a2e3a"/>
+  <circle cx="130" cy="245" r="5" fill="#7a2e3a"/>
+</svg>
