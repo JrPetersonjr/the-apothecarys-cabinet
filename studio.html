@@ -31,7 +31,7 @@
             <button class="menu-btn">File</button>
             <div class="dropdown-menu">
               <div class="dropdown-item" onclick="window.WebStudio.openNewProductModal()">
-                <span>New Remedy Formulation...</span>
+                <span>New Botanical Preparation...</span>
                 <span class="dropdown-shortcut">Ctrl+N</span>
               </div>
               <div class="dropdown-item" onclick="window.location.reload()">
@@ -67,7 +67,7 @@
             <button class="menu-btn">Products</button>
             <div class="dropdown-menu">
               <div class="dropdown-item" onclick="window.WebStudio.openNewProductModal()">
-                <span>Add New Remedy</span>
+                <span>Add New Preparation</span>
               </div>
               <div class="dropdown-item" onclick="window.WebStudio.setWorkspace('inventory')">
                 <span>View Inventory Matrix</span>
@@ -161,7 +161,7 @@
 
       <div class="quick-actions">
         <button class="btn-action-primary" onclick="window.WebStudio.openNewProductModal()">
-          + Add Remedy
+          + Add Preparation
         </button>
       </div>
     </div>
@@ -194,11 +194,11 @@
         <div class="view-panel" id="panel-inventory">
           <div class="panel-header">
             <div>
-              <h2 class="panel-title">📦 Botanical Remedy Inventory Matrix</h2>
-              <p class="panel-desc">Manage stock counts, botanical SKUs, pricing, dosage sizes, and formulation ingredients.</p>
+              <h2 class="panel-title">📦 Botanical Preparations Matrix</h2>
+              <p class="panel-desc">Manage stock counts, botanical SKUs, pricing, package sizes, and botanical ingredients.</p>
             </div>
             <button class="btn-action-primary" onclick="window.WebStudio.openNewProductModal()">
-              + Add New Remedy Formulation
+              + Add New Botanical Preparation
             </button>
           </div>
 
@@ -207,7 +207,7 @@
               <thead>
                 <tr>
                   <th style="width: 60px;">Vessel</th>
-                  <th>Remedy &amp; Formulation</th>
+                  <th>Botanical Preparation</th>
                   <th>SKU</th>
                   <th>Category</th>
                   <th>Price</th>
@@ -423,7 +423,7 @@
       <!-- Right Inspector Panel -->
       <aside class="inspector-panel">
         <div class="inspector-tabs">
-          <button class="insp-tab active" data-tab="insp-product-tab">Remedy</button>
+          <button class="insp-tab active" data-tab="insp-product-tab">Preparation</button>
           <button class="insp-tab" data-tab="insp-theme-tab">Aesthetic</button>
         </div>
 
@@ -432,7 +432,7 @@
           <!-- Tab 1: Product Inspector -->
           <div class="insp-content" id="insp-product-tab">
             <div class="prop-section">
-              <div class="prop-section-title">Selected Remedy Properties</div>
+              <div class="prop-section-title">Selected Preparation Properties</div>
               
               <div style="text-align: center; margin-bottom: 14px; background: var(--adobe-gray-900); padding: 10px; border-radius: 4px; border: 1px solid var(--adobe-gray-700);">
                 <img id="insp-prod-img-preview" src="" alt="Thumbnail" style="width: 80px; height: 80px; object-fit: contain;">
@@ -486,7 +486,7 @@
               </div>
 
               <div class="prop-group">
-                <label class="prop-label">Suggested Dosage Ritual</label>
+                <label class="prop-label">Suggested Ritual &amp; Use</label>
                 <textarea id="insp-prod-usage" class="prop-input" rows="2" style="resize: vertical;"></textarea>
               </div>
             </div>
@@ -539,7 +539,7 @@
           <span>Compositor Bridge: Connected</span>
         </div>
         <span>•</span>
-        <span id="status-prod-count">6 Remedies</span>
+        <span id="status-prod-count">6 Preparations</span>
         <span>•</span>
         <span id="status-stock-count">198 Units in Stock</span>
       </div>
@@ -553,17 +553,17 @@
 
   </div>
 
-  <!-- ── New Remedy Modal ─────────────────────────────────────────────── -->
+  <!-- ── New Botanical Modal ─────────────────────────────────────────────── -->
   <div class="studio-modal-overlay" id="modal-new-product">
     <div class="studio-modal">
       <div class="studio-modal-header">
-        <h4>New Botanical Remedy Formulation</h4>
+        <h4>New Botanical Preparation</h4>
         <button class="studio-modal-close" onclick="window.WebStudio.closeNewProductModal()">✕</button>
       </div>
 
       <div class="studio-modal-body">
         <div class="prop-group">
-          <label class="prop-label">Remedy Title</label>
+          <label class="prop-label">Preparation Title</label>
           <input type="text" id="new-prod-title" class="prop-input" placeholder="e.g. Appalachian Blue Vervain Tincture" />
         </div>
 

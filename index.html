@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Apothecary's Cabinet — Handcrafted Botanical Remedies</title>
+  <title>The Apothecary's Cabinet — Handcrafted Botanical Preparations &amp; Wellness</title>
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,7 +35,7 @@
 
       <nav>
         <ul class="nav-links">
-          <li><a href="#catalog" class="active">Remedies</a></li>
+          <li><a href="#catalog" class="active">Preparations</a></li>
           <li><a href="#story">Our Story</a></li>
           <li><a href="#philosophy">Ethos</a></li>
           <li><a href="#contact">Contact &amp; Hours</a></li>
@@ -73,7 +73,7 @@
       </div>
 
       <span class="hero-tag">EST. 2018 • HANDCRAFTED BY LYNN • WHISTLER, BC</span>
-      <h2 class="hero-title">Handcrafted Botanical Remedies &amp; Mountain Witchery</h2>
+      <h2 class="hero-title">Handcrafted Botanical Preparations &amp; Mountain Witchery</h2>
       <p class="hero-subtitle">
         <em>"I curate all products from recipe up."</em><br>
         All natural, organic, and cruelty-free artisan soap bars, botanical salves, facial nectars, and ritual elixirs handcrafted in the Coast Mountains of Whistler, BC.
@@ -104,7 +104,7 @@
   <!-- Main Catalog Controls -->
   <section id="catalog" class="catalog-controls">
     <div class="category-pills">
-      <button class="cat-pill active" data-cat="all">All Remedies</button>
+      <button class="cat-pill active" data-cat="all">All Preparations</button>
       <button class="cat-pill" data-cat="soaps">Soaps &amp; Bars</button>
       <button class="cat-pill" data-cat="spa">Spa &amp; Wellness</button>
       <button class="cat-pill" data-cat="salves">Salves &amp; Balms</button>
@@ -116,7 +116,7 @@
     </div>
 
     <div class="search-sort-group">
-      <input type="text" id="search-catalog" class="search-input" placeholder="Search herbs, remedies..." />
+      <input type="text" id="search-catalog" class="search-input" placeholder="Search herbs, soaps, preparations..." />
       <select id="sort-catalog" class="sort-select">
         <option value="featured">Featured Formulations</option>
         <option value="price-low">Price: Low to High</option>
@@ -183,16 +183,16 @@
     <div class="footer-inner">
       <div class="footer-brand">
         <h4>The Apothecary's Cabinet</h4>
-        <p style="margin-bottom: 12px;">Crafting herbal remedies and botanical wellness formulations since 2018.</p>
-        <p><strong>Storefront:</strong> 142 Whispering Pines Lane, Suite B, Whistler, BC 28801</p>
-        <p><strong>Apothecary Phone:</strong> (828) 555-HERB</p>
-        <p><strong>Email:</strong> remedies@theapothecaryscabinet.com</p>
+        <p style="margin-bottom: 12px;">Crafting organic botanical preparations and wellness rituals since 2018.</p>
+        <p><strong>Storefront:</strong> Whistler Village Sanctuary, Whistler, BC, Canada</p>
+        <p><strong>Apothecary Phone:</strong> (604) 555-HERB</p>
+        <p><strong>Email:</strong> hello@theapothecaryscabinet.com</p>
       </div>
 
       <div class="footer-col">
-        <h5>Remedies</h5>
+        <h5>Botanical Preparations</h5>
         <ul>
-          <li><a href="#catalog">Immune Elixirs</a></li>
+          <li><a href="#catalog">Handcrafted Soaps</a></li>
           <li><a href="#catalog">Herbal Tinctures</a></li>
           <li><a href="#catalog">Botanical Salves</a></li>
           <li><a href="#catalog">Loose Leaf Teas</a></li>
@@ -206,8 +206,8 @@
           <li><a href="javascript:void(0)" onclick="window.ApothecaryStore.openOrdersLedger()">View Past Invoices</a></li>
           <li><a href="#catalog">Shipping &amp; Delivery</a></li>
           <li><a href="#story">Botanical Returns</a></li>
-          <li><a href="#story">Certificate of Analysis</a></li>
-          <li><a href="#contact">Consult an Herbalist</a></li>
+          <li><a href="#story">Ingredient Sourcing &amp; Purity</a></li>
+          <li><a href="#contact">Connect with Lynn</a></li>
         </ul>
       </div>
 
@@ -229,7 +229,7 @@
   <div class="cart-overlay" id="cart-overlay" onclick="if(event.target===this) window.ApothecaryStore.closeCartDrawer()">
     <div class="cart-drawer">
       <div class="cart-header">
-        <h3>Your Remedy Bag</h3>
+        <h3>Your Botanical Basket</h3>
         <button class="btn-close-cart" onclick="window.ApothecaryStore.closeCartDrawer()">✕</button>
       </div>
 
@@ -275,13 +275,13 @@
   <div class="modal-overlay" id="product-modal" onclick="if(event.target===this) window.ApothecaryStore.closeProductModal()">
     <div class="modal-card">
       <div class="modal-header">
-        <h3 id="modal-prod-title">Remedy Details</h3>
+        <h3 id="modal-prod-title">Preparation Details</h3>
         <button class="modal-close" onclick="window.ApothecaryStore.closeProductModal()">✕</button>
       </div>
       <div class="modal-body">
         <div class="checkout-grid">
           <div style="background: var(--moss-900); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; overflow: hidden;">
-            <img id="modal-prod-img" src="" alt="Remedy" style="width: 100%; height: auto; max-height: 320px; object-fit: contain;">
+            <img id="modal-prod-img" src="" alt="Botanical Preparation" style="width: 100%; height: auto; max-height: 320px; object-fit: contain;">
           </div>
           <div>
             <div id="modal-prod-sku" style="font-size: 0.75rem; font-family: var(--font-mono); color: #888; margin-bottom: 6px;"></div>
@@ -296,7 +296,7 @@
             </div>
 
             <div style="margin-bottom: 18px;">
-              <strong style="font-size: 0.78rem; text-transform: uppercase; color: var(--gold-600); display: block; margin-bottom: 4px;">Suggested Dosage &amp; Ritual:</strong>
+              <strong style="font-size: 0.78rem; text-transform: uppercase; color: var(--gold-600); display: block; margin-bottom: 4px;">Suggested Ritual &amp; Use:</strong>
               <p id="modal-prod-usage" style="font-size: 0.82rem; color: var(--ink-700);"></p>
             </div>
 
@@ -469,7 +469,7 @@
                 <img src="assets/logo-crest.svg" alt="Crest" style="width: 40px; height: 40px;">
                 <h2>The Apothecary's Cabinet</h2>
               </div>
-              <p>142 Whispering Pines Lane, Suite B<br>Whistler, BC 28801 • Tel: (828) 555-HERB<br>remedies@theapothecaryscabinet.com</p>
+              <p>Whistler Village Sanctuary<br>Whistler, BC, Canada • Tel: (604) 555-HERB<br>hello@theapothecaryscabinet.com</p>
             </div>
 
             <div class="invoice-meta">
@@ -496,7 +496,7 @@
           <table class="invoice-table">
             <thead>
               <tr>
-                <th>Remedy Formulation / Description</th>
+                <th>Botanical Preparation / Description</th>
                 <th class="num">Qty</th>
                 <th class="num">Unit Price</th>
                 <th class="num">Line Total</th>
@@ -533,9 +533,9 @@
           </div>
 
           <div class="invoice-footer">
-            <p>Thank you for supporting traditional small-batch Appalachian herbalism.</p>
+            <p>Thank you for supporting small-batch handcrafted Pacific Northwest botanicals.</p>
             <p style="margin-top: 4px; font-size: 0.72rem; color: #888;">
-              Questions about botanical dosages or returns? Email remedies@theapothecaryscabinet.com with your invoice number.
+              Questions about our botanical preparations or returns? Email hello@theapothecaryscabinet.com with your invoice number.
             </p>
           </div>
         </div>
@@ -626,11 +626,11 @@
         <div class="portal-view active" id="tab-portal-products">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
             <div>
-              <h4 style="font-family: var(--font-serif); font-size: 1.15rem; color: var(--moss-900);">Apothecary Remedy Catalog</h4>
+              <h4 style="font-family: var(--font-serif); font-size: 1.15rem; color: var(--moss-900);">Apothecary Preparations Catalog</h4>
               <p style="font-size: 0.8rem; color: #666;">Add new soap bars, update prices, adjust inventory, and edit botanical descriptions.</p>
             </div>
             <button class="btn-primary" onclick="window.ApothecaryStore.openCreateProductForm()">
-              + Add New Soap Bar / Remedy
+              + Add New Soap Bar / Preparation
             </button>
           </div>
 
@@ -638,7 +638,7 @@
             <thead>
               <tr>
                 <th style="width: 50px;">Vessel</th>
-                <th>Remedy Formulation</th>
+                <th>Botanical Preparation</th>
                 <th>SKU</th>
                 <th>Price</th>
                 <th>Stock Units</th>
@@ -827,7 +827,7 @@
   <div class="modal-overlay" id="portal-edit-product-modal" onclick="if(event.target===this) window.ApothecaryStore.closeEditProductModal()">
     <div class="modal-card" style="width: 720px;">
       <div class="modal-header">
-        <h3 id="portal-form-title">Add New Remedy or Soap Bar</h3>
+        <h3 id="portal-form-title">Add New Botanical Preparation or Soap Bar</h3>
         <button class="modal-close" onclick="window.ApothecaryStore.closeEditProductModal()">✕</button>
       </div>
 

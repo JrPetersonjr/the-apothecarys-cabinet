@@ -219,7 +219,7 @@
     const ingredients = $("#new-prod-ingredients").value.trim() || "Organically grown whole plant extracts.";
 
     if (!title) {
-      alert("Please specify a remedy formulation title.");
+      alert("Please specify a botanical preparation title.");
       return;
     }
 
@@ -250,7 +250,7 @@
   }
 
   function deleteProduct(productId) {
-    if (!confirm("Are you sure you wish to delete this remedy from the catalog?")) return;
+    if (!confirm("Are you sure you wish to delete this preparation from the catalog?")) return;
     studioState.products = studioState.products.filter(p => p.id !== productId);
     if (studioState.selectedProductId === productId) {
       studioState.selectedProductId = studioState.products[0]?.id || null;
@@ -406,7 +406,7 @@ $ cd /mnt/nvme0/AIRLOCK/WebStudio/templates/apothecary && python3 -m http.server
     const stockEl = $("#status-stock-count");
     const ordersEl = $("#status-orders-count");
 
-    if (countEl) countEl.textContent = `${studioState.products.length} Remedies`;
+    if (countEl) countEl.textContent = `${studioState.products.length} Preparations`;
     if (stockEl) stockEl.textContent = `${totalStock} Units in Stock`;
     if (ordersEl) ordersEl.textContent = `${studioState.orders.length} Invoices`;
   }

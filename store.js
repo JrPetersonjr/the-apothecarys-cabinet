@@ -19,7 +19,7 @@
     address: "Whistler Village Sanctuary",
     cityStateZip: "Whistler, BC, Canada",
     phone: "(604) 555-HERB",
-    email: "remedies@theapothecaryscabinet.com",
+    email: "hello@theapothecaryscabinet.com",
     taxRate: 0.05, // 5% GST
     freeShippingThreshold: 65.0,
     shippingRates: {
@@ -144,7 +144,7 @@
         "description": "Curated from recipe up for weary muscles and joint stiffness. Solar-infused mountain arnica blossoms, coastal spruce resin, and st. john's wort steeped into golden jojoba oil and local beeswax.",
         "ingredients": "Organic Arnica montana flower infusion, Wild Coastal Spruce Pitch, St. John's Wort (Hypericum perforatum), Golden Jojoba Oil, Local BC Beeswax, Wintergreen & Black Pepper Essential Oils.",
         "usage": "Massage thoroughly into sore shoulders, tired knees, bruised muscles, and overworked joints morning and night.",
-        "badge": "Alpine Remedy"
+        "badge": "Alpine Preparation"
     },
     {
         "id": "prod-facial-nectar",
@@ -175,7 +175,7 @@
         "stock": 22,
         "lowStockThreshold": 8,
         "image": "assets/tincture.svg",
-        "description": "Curated from recipe up for quiet mountain evenings. Botanical sedation formula of wild-harvested valerian root, sacred mugwort, passionflower, and chamomile steeped in organic cane spirit.",
+        "description": "Curated from recipe up for quiet mountain evenings. Soothing herbal blend of wild-harvested valerian root, sacred mugwort, passionflower, and chamomile steeped in organic cane spirit.",
         "ingredients": "Valerian Root (Valeriana officinalis), Wild Mugwort (Artemisia vulgaris), German Chamomile, Passionflower, Organic Cane Alcohol (45%), Mountain Spring Water.",
         "usage": "Dispense 1 full dropper under the tongue or in warm herbal tea 30 minutes before resting.",
         "badge": "Night Ritual"
@@ -234,7 +234,7 @@
 ];
 
   // Version migration to ensure live site loads authentic Whistler catalog
-  const CATALOG_VERSION = "2026-v3-dropship-custom";
+  const CATALOG_VERSION = "2026-v5-preparations";
   if (localStorage.getItem("apothecary_cat_version") !== CATALOG_VERSION) {
     localStorage.removeItem("apothecary_products");
     localStorage.removeItem("apothecary_config");
@@ -332,7 +332,7 @@
     const prod = state.products.find(p => p.id === productId);
     if (!prod) return;
     if (prod.stock <= 0) {
-      alert("This remedy is currently out of stock.");
+      alert("This preparation is currently out of stock.");
       return;
     }
 
@@ -463,7 +463,7 @@
     if (!list) return;
 
     if (state.cart.length === 0) {
-      list.innerHTML = `<div class="empty-cart-msg">Your apothecary satchel is empty.<br><br>Add handcrafted remedies from our catalog.</div>`;
+      list.innerHTML = `<div class="empty-cart-msg">Your apothecary satchel is empty.<br><br>Add handcrafted botanical preparations from our catalog.</div>`;
       $("#cart-subtotal").textContent = "$0.00";
       $("#cart-discount").textContent = "-$0.00";
       $("#cart-shipping").textContent = "$0.00";
@@ -987,7 +987,7 @@
     portalState.editingProductId = null;
     portalState.tempImageDataUrl = null;
 
-    $("#portal-form-title").textContent = "Add New Remedy or Soap Bar";
+    $("#portal-form-title").textContent = "Add New Botanical Preparation or Soap Bar";
     $("#portal-prod-title").value = "";
     $("#portal-prod-category").value = "Soaps & Bars";
     $("#portal-prod-sku").value = `AC-${Math.floor(100 + Math.random() * 900)}`;
@@ -1081,7 +1081,7 @@
   function saveProductFromPortal() {
     const title = $("#portal-prod-title").value.trim();
     if (!title) {
-      alert("Please enter a title for this soap or remedy.");
+      alert("Please enter a title for this soap or preparation.");
       return;
     }
 

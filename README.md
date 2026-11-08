@@ -7,7 +7,7 @@ Interactive e-commerce storefront draft and management studio built for **The Ap
 
 ## Features in this Draft
 
-- **Botanical Catalog**: 6 handcrafted formulations with botanical ingredients, dosage rituals, and custom vector illustrations.
+- **Botanical Catalog**: 6 handcrafted formulations with botanical ingredients, suggested usage rituals, and custom vector illustrations.
 - **Direct Selling & Hybrid Checkout**: Live slide-out bag with dynamic subtotal, shipping tiers, coupon codes (`HERBAL10`), and tax calculation.
 - **Payment Methods**: Direct Stripe/Card simulation, PayPal Smart Checkout, and Local Storefront Pickup at the counter.
 - **Automated Invoices & Receipts**: Generates instant printable / downloadable order receipts (`#AC-2026-XXXXXX`) with customer details and line-item breakdown.
