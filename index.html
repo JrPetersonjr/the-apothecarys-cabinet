@@ -75,8 +75,8 @@
       <span class="hero-tag">EST. 2018 • HANDCRAFTED BY LYNN • WHISTLER, BC</span>
       <h2 class="hero-title">Handcrafted Botanical Preparations &amp; Mountain Witchery</h2>
       <p class="hero-subtitle">
-        <em>"I curate all products from recipe up."</em><br>
-        All natural, organic, and cruelty-free artisan soap bars, botanical salves, facial nectars, and ritual elixirs handcrafted in the Coast Mountains of Whistler, BC.
+        <em>"Our wide variety of products offers a natural way to meet the body's needs from head to toe, and everything in between."</em><br>
+        Handcrafted with care by Lynn — all-natural, organic, cruelty-free botanical preparations, lavish lotion bars, comfrey salves, herbal face serums, and custom creations.
       </p>
       <div class="hero-ctas">
         <a href="#catalog" class="btn-primary">Browse The Formulations 🌿</a>
@@ -139,20 +139,26 @@
       <div class="story-content">
         <h2>Meet Lynn &amp; The Apothecary's Cabinet</h2>
         <div style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold-400); margin-bottom: 8px; font-weight: 700;">
-          Founder, Herbalist &amp; Formulator
+          Founder, Herbalist &amp; Formulator • EST. 2018
         </div>
         <p style="font-size: 1.05rem; font-style: italic; color: var(--gold-400); margin-bottom: 14px;">
-          "I curate all products from recipe up. All natural, organic and cruelty-free spa &amp; wellness formulations."
+          "Self-Awareness + Conscious Consumption = A Balanced World"
         </p>
         <p>
-          At <strong>The Apothecary's Cabinet</strong>, every single product is crafted from recipe up by <strong>Lynn</strong> in Whistler, British Columbia. Drawing from coastal mountain flora and old-world herbal traditions, Lynn personally formulates every soap bar, restorative body balm, and facial nectar to ensure authentic purity.
+          "Over 10 years ago my health declined, leaving myself and the doctors at a loss. I started researching my conditions, finding botanical alternatives, and putting my backyard (and the world's) to use. My goal is to bring healthy, natural alternatives for everyday or far-from-the-norm ailments. I started with a plan to help myself that evolved into wanting to help my neighbor, and then the world."
         </p>
         <p>
-          Zero artificial chemicals, parabens, synthetic detergents, or animal testing. Only pure cold-pressed plant oils, solar-infused mountain flowers, raw local honey, and pure essential oils formulated to restore body and spirit.
+          "In my cabinet, not only do I use natural ingredients, but I also use Eco-friendly, biodegradable, or reusable packaging as much as possible. Thus, cutting back on the huge plastic problems we have in our landfills and oceans."
         </p>
-        <div style="margin-top: 24px;">
+        <p style="font-size: 0.85rem; color: #a3b899; margin-top: 10px; border-left: 2px solid var(--gold-400); padding-left: 12px;">
+          *We do not diagnose. Products are made in a pet-loving home and may contain allergens. All sales are final.*
+        </p>
+        <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
           <button class="btn-primary" onclick="window.scrollTo({top: document.getElementById('catalog').offsetTop - 60, behavior: 'smooth'})">
-            Discover Current Batches
+            Shop Lynn's Creations
+          </button>
+          <button class="btn-outline" onclick="window.ApothecaryStore.openMenuBrochureModal()">
+            📄 View Printed Menus &amp; Brochure
           </button>
         </div>
       </div>
@@ -160,19 +166,19 @@
       <div class="story-badge-box">
         <div class="badge-item">
           <h5>Direct Botanical Sourcing</h5>
-          <p>Every plant ingredient is traced directly to local coastal & alpine botanical foragers and organic family farms.</p>
+          <p>Hand-harvested backyard herbs, wildcrafted botanicals, and unpasteurized raw local honey.</p>
         </div>
         <div class="badge-item">
-          <h5>Amber Glass Preservation</h5>
-          <p>Protected from UV degradation in pharmaceutical-grade cobalt and amber glass vessels.</p>
+          <h5>Eco-Conscious Packaging</h5>
+          <p>Biodegradable wrappers, metal workshop tins, and reusable glass nightstand jars to cut landfill waste.</p>
         </div>
         <div class="badge-item">
-          <h5>Zero Chemical Additives</h5>
-          <p>100% whole plant extractions without isolate chemicals or chemical binders.</p>
+          <h5>Zero Harsh Chemicals</h5>
+          <p>No synthetic detergents, no mineral oils, and no parabens. Plant-powered nourishment for every body.</p>
         </div>
         <div class="badge-item">
-          <h5>Third-Party Tested</h5>
-          <p>Independently tested for heavy metals, pesticides, and verified active plant constituents.</p>
+          <h5>Personalized 1-on-1 Consults</h5>
+          <p>Custom wellness intakes with Lynn including herbal plans, free custom formulation, and 3 &amp; 6 month checkups.</p>
         </div>
       </div>
     </div>
@@ -183,10 +189,11 @@
     <div class="footer-inner">
       <div class="footer-brand">
         <h4>The Apothecary's Cabinet</h4>
-        <p style="margin-bottom: 12px;">Crafting organic botanical preparations and wellness rituals since 2018.</p>
-        <p><strong>Storefront:</strong> Whistler Village Sanctuary, Whistler, BC, Canada</p>
-        <p><strong>Apothecary Phone:</strong> (604) 555-HERB</p>
-        <p><strong>Email:</strong> hello@theapothecaryscabinet.com</p>
+        <p style="margin-bottom: 12px;">"Our wide variety of products offers a natural way to meet the body's needs from head to toe, and everything in between."</p>
+        <p><strong>Sanctuary Phone:</strong> (231) 884-4212</p>
+        <p><strong>Facebook:</strong> <a href="https://facebook.com/Theapothecariancabinet" target="_blank" style="color: var(--gold-400);">Theapothecariancabinet</a></p>
+        <p><strong>Instagram:</strong> <a href="https://instagram.com/The_Apothecarys_Cabinet" target="_blank" style="color: var(--gold-400);">@The_Apothecarys_Cabinet</a></p>
+        <p><strong>Support Email:</strong> hello@theapothecaryscabinet.com</p>
       </div>
 
       <div class="footer-col">
@@ -928,5 +935,39 @@
 
   <!-- Store Logic -->
   <script src="store.js"></script>
+  <!-- ── Printed Menu & Brochure Modal ────────────────────────────────────────── -->
+  <div class="modal-overlay" id="brochure-modal" onclick="if(event.target===this) window.ApothecaryStore.closeMenuBrochureModal()">
+    <div class="modal-card" style="width: 880px; max-height: 90vh; overflow-y: auto;">
+      <div class="modal-header">
+        <h3>Lynn's Official Printed Menu &amp; Brochure</h3>
+        <button class="modal-close" onclick="window.ApothecaryStore.closeMenuBrochureModal()">✕</button>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <p style="margin-bottom: 16px; font-size: 0.9rem; color: #666;">
+          Original trifold brochure, story, consult intake, and menu panels photographed directly from Lynn's workshop.
+        </p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+          <div>
+            <h5 style="margin-bottom: 8px; color: var(--moss-900);">Story &amp; Consultations</h5>
+            <img src="assets/brochure-story-consults.jpg" alt="Story & Consultations Brochure" style="width: 100%; border-radius: var(--radius-sm); box-shadow: var(--shadow-sm); border: 1px solid #ddd;">
+          </div>
+          <div>
+            <h5 style="margin-bottom: 8px; color: var(--moss-900);">Menu &amp; Best Sellers</h5>
+            <img src="assets/brochure-products-menu.jpg" alt="Menu & Best Sellers" style="width: 100%; border-radius: var(--radius-sm); box-shadow: var(--shadow-sm); border: 1px solid #ddd;">
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div>
+            <h5 style="margin-bottom: 8px; color: var(--moss-900);">Annual Black Friday &amp; Specials</h5>
+            <img src="assets/sale-black-friday.jpg" alt="Annual Black Friday Flyer" style="width: 100%; border-radius: var(--radius-sm); box-shadow: var(--shadow-sm); border: 1px solid #ddd;">
+          </div>
+          <div>
+            <h5 style="margin-bottom: 8px; color: var(--moss-900);">Apothecary Field Guide Book</h5>
+            <img src="assets/book-field-guide.jpg" alt="A Field Guide to Foraging & Folk Healing" style="width: 100%; border-radius: var(--radius-sm); box-shadow: var(--shadow-sm); border: 1px solid #ddd;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
