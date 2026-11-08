@@ -17,7 +17,7 @@
     storeName: "The Apothecary's Cabinet",
     tagline: "Our wide variety of products offers a natural way to meet the body's needs from head to toe, and everything in between.",
     address: "The Apothecary's Cabinet Sanctuary",
-    cityStateZip: "Whistler, BC & Cadillac, MI",
+    cityStateZip: "Cadillac, MI & Beyond",
     phone: "(231) 884-4212",
     email: "hello@theapothecaryscabinet.com",
     facebook: "facebook.com/Theapothecariancabinet",
@@ -123,7 +123,7 @@
     "lowStockThreshold": 20,
     "image": "assets/salve.svg",
     "fulfillmentType": "studio",
-    "description": "Silky, long-lasting moisture formulated with raw local beeswax, organic sweet almond oil, and raw honey. Protects against mountain winds, cold snaps, and dry cracked lips without waxy buildup.",
+    "description": "Silky, long-lasting moisture formulated with raw local beeswax, organic sweet almond oil, and raw honey. Protects against harsh winds, cold weather, and dry cracked lips without waxy buildup.",
     "ingredients": "Local BC Beeswax, Organic Shea Butter, Sweet Almond Oil, Raw Unpasteurized Honey, Peppermint Essential Oil, Vitamin E.",
     "usage": "Glide generously across lips as often as needed throughout the day and before bedtime.",
     "badge": "Customer Love"
@@ -304,7 +304,7 @@
     "image": "assets/tincture.svg",
     "fulfillmentType": "studio",
     "description": "Our most sought-after botanical tincture. Prepared with Passiflora incarnata to gently tone the central nervous system, curb racing anxiety loops, and soothe restless worry.",
-    "ingredients": "Organic Passion Flower Herb & Vine (Passiflora incarnata), Organic Cane Alcohol (45%), Mountain Spring Water.",
+    "ingredients": "Organic Passion Flower Herb & Vine (Passiflora incarnata), Organic Cane Alcohol (45%), Pure Spring Water.",
     "usage": "Take 20 to 30 drops (approx. 1 dropperful) directly under tongue or in a small splash of water 2-3 times daily as needed for stress.",
     "badge": "Stress Support"
   },
@@ -321,7 +321,7 @@
     "lowStockThreshold": 10,
     "image": "assets/tincture.svg",
     "fulfillmentType": "studio",
-    "description": "Potent earthen root extraction for deep, uninterrupted nighttime rest. Traditional Appalachian and folk sleep ally.",
+    "description": "Potent earthen root extraction for deep, uninterrupted nighttime rest. Traditional time-tested folk sleep ally.",
     "ingredients": "Valerian Root (Valeriana officinalis), Organic Cane Alcohol, Spring Water.",
     "usage": "Take 30-40 drops in water or nighttime tea 30 minutes before bed.",
     "badge": "Deep Rest"
@@ -415,8 +415,8 @@
   }
 ];
 
-  // Version migration to ensure live site loads authentic Whistler catalog
-  const CATALOG_VERSION = "2026-v6-lynn-actual-menus";
+  // Version migration to ensure live site loads authentic catalog
+  const CATALOG_VERSION = "2026-v7-authentic-lynn";
   if (localStorage.getItem("apothecary_cat_version") !== CATALOG_VERSION) {
     localStorage.removeItem("apothecary_products");
     localStorage.removeItem("apothecary_config");

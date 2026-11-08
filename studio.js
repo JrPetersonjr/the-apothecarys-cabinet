@@ -215,7 +215,7 @@
     const size = $("#new-prod-size").value.trim() || "60 ml (2 fl oz)";
     const price = parseFloat($("#new-prod-price").value) || 24.00;
     const stock = parseInt($("#new-prod-stock").value, 10) || 25;
-    const desc = $("#new-prod-desc").value.trim() || "Artisanal botanical formulation handcrafted with organic mountain herbs.";
+    const desc = $("#new-prod-desc").value.trim() || "Artisanal botanical formulation handcrafted with organic herbs and botanicals.";
     const ingredients = $("#new-prod-ingredients").value.trim() || "Organically grown whole plant extracts.";
 
     if (!title) {

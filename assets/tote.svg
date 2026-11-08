@@ -15,7 +15,7 @@
   <!-- Logo on Canvas -->
   <circle cx="200" cy="225" r="32" fill="none" stroke="#14241b" stroke-width="1.5" stroke-dasharray="4 2"/>
   <text x="200" y="222" text-anchor="middle" font-family="serif" font-size="16" font-weight="bold" fill="#14241b">TAC</text>
-  <text x="200" y="235" text-anchor="middle" font-family="serif" font-size="5.5" font-weight="bold" fill="#3a5240" letter-spacing="1">WHISTLER BC</text>
+  <text x="200" y="235" text-anchor="middle" font-family="serif" font-size="5.5" font-weight="bold" fill="#3a5240" letter-spacing="1">EST. 2018</text>
   <text x="200" y="244" text-anchor="middle" font-family="monospace" font-size="5" fill="#777">EST. 2018</text>
   <text x="200" y="275" text-anchor="middle" font-family="monospace" font-size="6.5" fill="#555">100% ORGANIC COTTON</text>
 </svg>
