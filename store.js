@@ -13,150 +13,157 @@
   'use strict';
 
   // ── Default Store Configuration ───────────────────────────────────────────
-  const DEFAULT_CONFIG = {
+    const DEFAULT_CONFIG = {
     storeName: "The Apothecary's Cabinet",
-    tagline: "Artisanal Botanical Remedies & Handcrafted Tinctures",
-    address: "142 Whispering Pines Lane, Suite B",
-    cityStateZip: "Asheville, NC 28801",
-    phone: "(828) 555-HERB",
-    email: "remedies@apothecaryscabinet.com",
-    taxRate: 0.07, // 7% local sales tax
+    tagline: "I curate all products from recipe up. All natural, organic and cruelty-free.",
+    address: "Whistler Village Sanctuary",
+    cityStateZip: "Whistler, BC, Canada",
+    phone: "(604) 555-HERB",
+    email: "remedies@theapothecaryscabinet.com",
+    taxRate: 0.05, // 5% GST
     freeShippingThreshold: 65.0,
     shippingRates: {
-      standard: { name: "Standard Botanical Ground (3-5 days)", cost: 5.50 },
-      express: { name: "Expedited Herbal Courier (1-2 days)", cost: 14.00 },
-      pickup: { name: "Local Storefront Pickup (Same-Day)", cost: 0.00 }
+      standard: { name: "Standard Mountain Ground (3-5 days)", cost: 5.50 },
+      express: { name: "Expedited Alpine Courier (1-2 days)", cost: 14.00 },
+      pickup: { name: "Whistler Village Local Pickup (Same-Day)", cost: 0.00 }
     },
     promoCodes: {
-      "HERBAL10": { type: "percent", value: 10, label: "10% Herbalist Welcome" },
-      "APOTHECARY15": { type: "percent", value: 15, label: "15% Seasonal Tonic Special" },
-      "FREESHIP": { type: "shipping", value: 0, label: "Complimentary Shipping" }
+      "HERBAL10": { type: "percent", value: 10, label: "10% Welcome to the Cabinet" },
+      "SOAPLOVE": { type: "percent", value: 15, label: "15% Handcrafted Soap Special" },
+      "FREESHIP": { type: "shipping", value: 0, label: "Complimentary Mountain Shipping" }
     }
   };
 
   // ── Default Product Catalog ───────────────────────────────────────────────
-  const DEFAULT_PRODUCTS = [
+    const DEFAULT_PRODUCTS = [
     {
-      id: "prod-honey-oat-soap",
-      sku: "AC-SOP-007",
-      title: "Raw Honey & Colloidal Oat Herbal Soap Bar",
-      category: "Soaps & Bars",
-      categorySlug: "soaps",
-      size: "5.5 oz rustic bar",
-      price: 12.00,
-      comparePrice: 14.00,
-      stock: 28,
-      lowStockThreshold: 8,
-      image: "assets/soap.svg",
-      description: "Cold-processed botanical soap made with farm-fresh goat's milk, unpasteurized Appalachian wildflower honey, and finely milled colloidal oats to gently soothe sensitive and dry skin.",
-      ingredients: "Saponified oils of Olive, Coconut & Sustainable Palm, Raw Goat Milk, Raw Appalachian Wildflower Honey, Organic Colloidal Oatmeal, Sweet Orange & Bergamot Essential Oils.",
-      usage: "Lather between warm palms or on a natural sea sponge, cleanse skin gently, and place on a well-draining wooden soap deck between washes to extend bar longevity.",
-      badge: "Fresh Batch"
-    },
-
-    {
-      id: "prod-reishi-elder",
-      sku: "AC-ELX-001",
-      title: "Wild Forest Reishi & Elderberry Elixir",
-      category: "Tinctures",
-      categorySlug: "tinctures",
-      size: "120 ml (4 fl oz)",
-      price: 28.00,
-      comparePrice: 34.00,
-      stock: 38,
-      lowStockThreshold: 10,
-      image: "assets/elixir.svg",
-      description: "A potent immune-reinforcing syrup brewed with wildcrafted Appalachian elderberries, dual-extracted red reishi mushroom, ceylon cinnamon, and raw wildflower honey.",
-      ingredients: "Elderberries (Sambucus nigra), Red Reishi (Ganoderma lucidum), Raw Honey, Ceylon Cinnamon, Ginger root, Organic Cane Alcohol (20%).",
-      usage: "Take 1 to 2 teaspoons daily as a preventative tonic, or up to 4 times daily during seasonal shifts.",
-      badge: "Bestseller"
+        "id": "prod-honey-oat-soap",
+        "sku": "AC-SOP-001",
+        "title": "Raw Honey & Colloidal Oat Herbal Soap Bar",
+        "category": "Soaps & Bars",
+        "categorySlug": "soaps",
+        "size": "5.5 oz rustic bar",
+        "price": 12.0,
+        "comparePrice": 14.0,
+        "stock": 28,
+        "lowStockThreshold": 8,
+        "image": "assets/soap.svg",
+        "description": "Curated from recipe up in Whistler, BC. Handcrafted using cold-process soapmaking with fresh goat's milk, unpasteurized wildflower honey, and colloidal oats to soothe and nourish sensitive mountain skin.",
+        "ingredients": "Saponified Organic Olive Oil, Coconut Oil, Sustainable RSPO Palm Oil, Fresh Goat Milk, Raw Wildflower Honey, Colloidal Oatmeal, Sweet Orange & Bergamot Pure Essential Oils.",
+        "usage": "Lather between warm hands or a natural sea sponge, cleanse gently, and rest on a draining wooden soap dish between washes.",
+        "badge": "Fresh Batch"
     },
     {
-      id: "prod-arnica-balm",
-      sku: "AC-SLV-002",
-      title: "Arnica & Calendula Deep Soothing Salve",
-      category: "Salves & Balms",
-      categorySlug: "salves",
-      size: "60 g amber glass jar",
-      price: 22.00,
-      comparePrice: null,
-      stock: 45,
-      lowStockThreshold: 8,
-      image: "assets/salve.svg",
-      description: "Slow-infused botanical relief balm combining solar-steeped arnica montana flowers, calendula, and st. john's wort into grass-fed tallow and golden beeswax.",
-      ingredients: "Arnica montana flower oil, Calendula officinalis, Hypericum perforatum, Organic Golden Jojoba, Pure Unrefined Beeswax, Lavender essential oil.",
-      usage: "Massage a dime-sized amount into sore muscles, weary joints, and bruised tissues twice daily.",
-      badge: "Organic"
+        "id": "prod-spruce-salve",
+        "sku": "AC-SLV-002",
+        "title": "Glacier Spruce & Arnica Mountain Relief Salve",
+        "category": "Salves & Balms",
+        "categorySlug": "salves",
+        "size": "60 g amber glass jar",
+        "price": 24.0,
+        "comparePrice": null,
+        "stock": 42,
+        "lowStockThreshold": 8,
+        "image": "assets/salve.svg",
+        "description": "Curated from recipe up for weary muscles and joint stiffness. Solar-infused mountain arnica blossoms, coastal spruce resin, and st. john's wort steeped into golden jojoba oil and local beeswax.",
+        "ingredients": "Organic Arnica montana flower infusion, Wild Coastal Spruce Pitch, St. John's Wort (Hypericum perforatum), Golden Jojoba Oil, Local BC Beeswax, Wintergreen & Black Pepper Essential Oils.",
+        "usage": "Massage thoroughly into sore shoulders, tired knees, bruised muscles, and overworked joints morning and night.",
+        "badge": "Alpine Remedy"
     },
     {
-      id: "prod-lucid-sleep",
-      sku: "AC-TNC-003",
-      title: "Lucid Dream Sleep & Evening Tincture",
-      category: "Tinctures",
-      categorySlug: "tinctures",
-      size: "50 ml dropper bottle",
-      price: 32.00,
-      comparePrice: 38.00,
-      stock: 19,
-      lowStockThreshold: 8,
-      image: "assets/tincture.svg",
-      description: "Gentle nervous system sedative formulated to ease racing evening thoughts and promote vivid, restorative sleep without morning grogginess.",
-      ingredients: "Valerian root (Valeriana officinalis), Mugwort (Artemisia vulgaris), German Chamomile, Passionflower, Skullcap, Organic grain alcohol (45%).",
-      usage: "Dispense 1 full dropper under the tongue or in warm water 30 minutes before sleep.",
-      badge: "Night Ritual"
+        "id": "prod-facial-nectar",
+        "sku": "AC-NEC-003",
+        "title": "Rosehip & Frankincense Cellular Nectar",
+        "category": "Spa & Wellness",
+        "categorySlug": "spa",
+        "size": "30 ml pipette bottle",
+        "price": 44.0,
+        "comparePrice": 52.0,
+        "stock": 16,
+        "lowStockThreshold": 5,
+        "image": "assets/nectar.svg",
+        "description": "Curated from recipe up. An intensive lipid serum combining cold-pressed virgin rosehip seed oil, sea buckthorn berry CO2, and pure sacred frankincense resin oil to deeply hydrate and repair sun- and wind-exposed skin.",
+        "ingredients": "Organic Cold-Pressed Rosa canina (Rosehip Seed Oil), Boswellia carterii (Frankincense Resin Oil), Sea Buckthorn Berry CO2, Non-GMO Vitamin E.",
+        "usage": "Press 3 to 4 drops into freshly cleansed, damp skin morning and evening after herbal misting.",
+        "badge": "Cruelty-Free"
     },
     {
-      id: "prod-sage-bundle",
-      sku: "AC-BOT-004",
-      title: "Wildcrafted Sweetgrass & White Sage Bundle",
-      category: "Botanicals",
-      categorySlug: "botanicals",
-      size: "7-8 inch botanical wand",
-      price: 14.00,
-      comparePrice: null,
-      stock: 52,
-      lowStockThreshold: 12,
-      image: "assets/bundle.svg",
-      description: "Ethically harvested California white sage braided together with high-plains sweetgrass and blue mountain lavender for cleansing home sanctuaries.",
-      ingredients: "Salvia apiana (White Sage), Hierochloe odorata (Sweetgrass), Lavandula angustifolia, 100% Raw Hemp Twine.",
-      usage: "Ignite the tip, blow out the flame gently, and circulate fragrant smoke through spaces or meditation rooms in an abalone shell or fireproof vessel.",
-      badge: "Ethically Sourced"
+        "id": "prod-lucid-sleep",
+        "sku": "AC-TNC-004",
+        "title": "Lucid Dream Sleep & Evening Botanical Tincture",
+        "category": "Tinctures",
+        "categorySlug": "tinctures",
+        "size": "50 ml dropper bottle",
+        "price": 30.0,
+        "comparePrice": 36.0,
+        "stock": 22,
+        "lowStockThreshold": 8,
+        "image": "assets/tincture.svg",
+        "description": "Curated from recipe up for quiet mountain evenings. Botanical sedation formula of wild-harvested valerian root, sacred mugwort, passionflower, and chamomile steeped in organic cane spirit.",
+        "ingredients": "Valerian Root (Valeriana officinalis), Wild Mugwort (Artemisia vulgaris), German Chamomile, Passionflower, Organic Cane Alcohol (45%), Mountain Spring Water.",
+        "usage": "Dispense 1 full dropper under the tongue or in warm herbal tea 30 minutes before resting.",
+        "badge": "Night Ritual"
     },
     {
-      id: "prod-chamomile-tea",
-      sku: "AC-TEA-005",
-      title: "Artisanal Golden Chamomile & Lemon Balm Tea",
-      category: "Teas & Infusions",
-      categorySlug: "teas",
-      size: "100 g loose leaf tin",
-      price: 18.00,
-      comparePrice: 22.00,
-      stock: 31,
-      lowStockThreshold: 10,
-      image: "assets/tea.svg",
-      description: "Whole whole-flower Egyptian chamomile heads blended with garden-fresh lemon balm, linden flowers, and spearmint leaves for a serene, sunny infusion.",
-      ingredients: "Matricaria recutita (Chamomile heads), Melissa officinalis (Lemon Balm), Tilia cordata, Mentha spicata.",
-      usage: "Steep 1 heaping tablespoon in 8 oz freshly boiled spring water for 7-10 minutes covered to preserve aromatic oils.",
-      badge: "Caffeine-Free"
+        "id": "prod-cedar-bundle",
+        "sku": "AC-RIT-005",
+        "title": "Coastal Cedarwood & White Sage Sacred Smudge Wand",
+        "category": "Ritual & Space",
+        "categorySlug": "botanicals",
+        "size": "7-8 inch botanical wand",
+        "price": 16.0,
+        "comparePrice": null,
+        "stock": 48,
+        "lowStockThreshold": 12,
+        "image": "assets/bundle.svg",
+        "description": "Curated from recipe up. Ethically wildcrafted coastal red cedar boughs, high-plains white sage, and dried blue mountain lavender braided with unbleached organic hemp twine for sacred home cleansing.",
+        "ingredients": "Coastal Red Cedar (Thuja plicata), White Sage (Salvia apiana), French Lavender (Lavandula angustifolia), 100% Raw Hemp Twine.",
+        "usage": "Light the tip with matches, blow out flame gently, and circulate fragrant botanical smoke in fire-safe abalone or stoneware dish.",
+        "badge": "Wildcrafted"
     },
     {
-      id: "prod-facial-nectar",
-      sku: "AC-NEC-006",
-      title: "Rosehip & Frankincense Cellular Nectar",
-      category: "Botanicals",
-      categorySlug: "botanicals",
-      size: "30 ml pipette vial",
-      price: 46.00,
-      comparePrice: 54.00,
-      stock: 14,
-      lowStockThreshold: 5,
-      image: "assets/nectar.svg",
-      description: "Luxurious cold-pressed botanical lipid oil packed with natural trans-retinoic acid, wild omegas, and sacred Omani frankincense resin to nourish and firm the skin.",
-      ingredients: "Virgin Organic Rosa canina (Rosehip seed oil), Boswellia carterii (Frankincense resin oil), Sea Buckthorn berry CO2, Helichrysum italicum, Non-GMO Vitamin E.",
-      usage: "Press 3 to 4 drops into clean, damp facial skin morning and night following botanical hydrosol.",
-      badge: "Artisanal Reserve"
+        "id": "prod-chamomile-tea",
+        "sku": "AC-TEA-006",
+        "title": "Golden Chamomile, Spearmint & Lemon Balm Alpine Tea",
+        "category": "Teas & Infusions",
+        "categorySlug": "teas",
+        "size": "100 g loose leaf tin",
+        "price": 18.0,
+        "comparePrice": 22.0,
+        "stock": 34,
+        "lowStockThreshold": 10,
+        "image": "assets/tea.svg",
+        "description": "Curated from recipe up. Whole whole-flower chamomile heads blended with Pacific Northwest spearmint, calming lemon balm, and linden blossom. Naturally caffeine-free.",
+        "ingredients": "Whole Chamomile Blossoms (Matricaria chamomilla), Lemon Balm (Melissa officinalis), Pacific Spearmint (Mentha spicata), Linden Flower (Tilia cordata).",
+        "usage": "Steep 1 heaping tablespoon in 8 oz freshly boiled mountain spring water for 7-10 minutes covered.",
+        "badge": "Organic"
+    },
+    {
+        "id": "prod-reishi-elixir",
+        "sku": "AC-ELX-007",
+        "title": "Wild Forest Reishi & Elderberry Immune Elixir",
+        "category": "Tinctures",
+        "categorySlug": "tinctures",
+        "size": "120 ml (4 fl oz)",
+        "price": 28.0,
+        "comparePrice": 34.0,
+        "stock": 30,
+        "lowStockThreshold": 8,
+        "image": "assets/elixir.svg",
+        "description": "Curated from recipe up. Dual-extracted red reishi mushroom, organic wild elderberries, ceylon cinnamon, and raw BC honey to fortify immune vitality through coastal winter shifts.",
+        "ingredients": "Elderberries (Sambucus nigra), Red Reishi (Ganoderma lucidum), Raw Local BC Honey, Ceylon Cinnamon, Ginger Root, Organic Cane Alcohol (20%).",
+        "usage": "Take 1 to 2 teaspoons daily as an immune tonic, or up to 3 times daily during seasonal weather shifts.",
+        "badge": "Bestseller"
     }
-  ];
+];
+
+  // Version migration to ensure live site loads authentic Whistler catalog
+  const CATALOG_VERSION = "2026-v2-whistler";
+  if (localStorage.getItem("apothecary_cat_version") !== CATALOG_VERSION) {
+    localStorage.removeItem("apothecary_products");
+    localStorage.removeItem("apothecary_config");
+    localStorage.setItem("apothecary_cat_version", CATALOG_VERSION);
+  }
 
   // ── State Store ───────────────────────────────────────────────────────────
   let state = {
