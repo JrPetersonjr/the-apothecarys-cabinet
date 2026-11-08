@@ -36,6 +36,82 @@
 
   // ── Default Product Catalog ───────────────────────────────────────────────
     const DEFAULT_PRODUCTS = [
+
+    {
+        "id": "prod-logo-tee",
+        "sku": "AC-TEE-008",
+        "title": "The Apothecary's Cabinet Vintage Organic Tee",
+        "category": "Merch & Apparel",
+        "categorySlug": "merch",
+        "size": "Unisex Sizing (XS - 2XL)",
+        "price": 32.0,
+        "comparePrice": 38.0,
+        "stock": 100,
+        "lowStockThreshold": 15,
+        "image": "assets/shirt.svg",
+        "fulfillmentType": "dropship",
+        "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL",
+            "2XL"
+        ],
+        "colors": [
+            "Washed Moss",
+            "Vintage Pitch Black",
+            "Oat Sand"
+        ],
+        "description": "100% certified organic ring-spun cotton tee screenprinted with Lynn's authentic gold crest monogram logo. Soft, durable, pre-shrunk, and printed on demand with eco-friendly water-based inks.",
+        "ingredients": "100% GOTS Certified Organic Cotton, Water-Based Non-Toxic Inks. Ethically produced & sweatshop free.",
+        "usage": "Machine wash cold inside-out with like colors. Tumble dry low or hang dry to preserve gold graphic vibrancy.",
+        "badge": "Print-on-Demand"
+    },
+    {
+        "id": "prod-canvas-tote",
+        "sku": "AC-TOT-009",
+        "title": "Sacred Flora Heavyweight Canvas Market Tote",
+        "category": "Merch & Apparel",
+        "categorySlug": "merch",
+        "size": "16 x 15 inch (with 22 inch straps)",
+        "price": 22.0,
+        "comparePrice": null,
+        "stock": 75,
+        "lowStockThreshold": 10,
+        "image": "assets/tote.svg",
+        "fulfillmentType": "dropship",
+        "sizes": [
+            "Standard"
+        ],
+        "colors": [
+            "Natural Canvas"
+        ],
+        "description": "Heavyweight 12 oz unbleached natural cotton canvas tote featuring The Apothecary's Cabinet Whistler insignia. Reinforced handles designed for farmers market hauls, foraging, and everyday rituals.",
+        "ingredients": "100% Unbleached Heavyweight Organic Cotton Canvas, Reinforced Stress Points.",
+        "usage": "Spot clean with damp cloth and gentle soap, air dry.",
+        "badge": "Eco-Conscious"
+    },
+    {
+        "id": "prod-custom-crate",
+        "sku": "AC-CST-010",
+        "title": "Custom Handcrafted Apothecary Gift Crate",
+        "category": "Custom Orders",
+        "categorySlug": "custom",
+        "size": "Made-to-Order Cedar Crate",
+        "price": 48.0,
+        "comparePrice": 56.0,
+        "stock": 25,
+        "lowStockThreshold": 5,
+        "image": "assets/giftbox.svg",
+        "fulfillmentType": "custom",
+        "customizable": true,
+        "description": "Personalized wooden gift crate crafted by Lynn. Includes your choice of 3 handcrafted soap bars, 1 restorative salve, and a custom wax-sealed parchment scroll with your personalized gift message.",
+        "ingredients": "Hand-selected botanical soap bars, solar-infused restorative balms, cedar wood crate, natural raffia, crimson wax seal.",
+        "usage": "Specify your preferred soap scents and personalized gift note during ordering. Lynn handcrafts and packs each crate to order in Whistler, BC.",
+        "badge": "Personalized"
+    }
+,
     {
         "id": "prod-honey-oat-soap",
         "sku": "AC-SOP-001",
@@ -158,7 +234,7 @@
 ];
 
   // Version migration to ensure live site loads authentic Whistler catalog
-  const CATALOG_VERSION = "2026-v2-whistler";
+  const CATALOG_VERSION = "2026-v3-dropship-custom";
   if (localStorage.getItem("apothecary_cat_version") !== CATALOG_VERSION) {
     localStorage.removeItem("apothecary_products");
     localStorage.removeItem("apothecary_config");
@@ -405,7 +481,11 @@
           <img src="${prod.image}" class="cart-item-img" alt="${prod.title}">
           <div class="cart-item-details">
             <div class="cart-item-title">${prod.title}</div>
-            <div class="cart-item-price">$${prod.price.toFixed(2)} each</div>
+            <div class="cart-item-price">
+              $${prod.price.toFixed(2)} each
+              ${item.selectedSize ? `<span style="font-size: 10px; color: var(--gold-600); margin-left: 6px;">Size: ${item.selectedSize}</span>` : ''}
+              ${item.customText ? `<br><span style="font-size: 10px; color: var(--green-accent);">Custom: "${item.customText.substring(0, 30)}"</span>` : ''}
+            </div>
             <div class="cart-qty-ctrl">
               <button class="qty-btn" onclick="window.ApothecaryStore.updateCartQuantity('${prod.id}', -1)">-</button>
               <span class="qty-val">${item.quantity}</span>
@@ -452,15 +532,48 @@
     $("#modal-prod-ingredients").textContent = prod.ingredients;
     $("#modal-prod-usage").textContent = prod.usage;
     $("#modal-prod-stock").textContent = prod.stock > 0 ? `In Stock: ${prod.stock} units ready for dispatch` : "Currently Sold Out";
+
+    // Size Selector Rendering
+    const sizeContainer = $("#modal-size-container");
+    if (sizeContainer) {
+      if (prod.sizes && prod.sizes.length > 1) {
+        modalSelectedSize = prod.sizes[0];
+        sizeContainer.innerHTML = `
+          <label style="font-size: 0.75rem; text-transform: uppercase; color: var(--gold-600); font-weight: 700; display: block; margin-bottom: 6px;">Select Size:</label>
+          <div style="display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap;">
+            ${prod.sizes.map((s, idx) => `
+              <button type="button" class="btn-tag size-pill ${idx === 0 ? 'active' : ''}" data-size="${s}" onclick="window.ApothecaryStore.setModalSize('${s}')" style="padding: 6px 12px; font-size: 11px;">${s}</button>
+            `).join("")}
+          </div>
+        `;
+        sizeContainer.style.display = "block";
+      } else {
+        sizeContainer.innerHTML = "";
+        sizeContainer.style.display = "none";
+      }
+    }
+
+    // Customization Input Rendering
+    const customContainer = $("#modal-custom-container");
+    if (customContainer) {
+      if (prod.customizable) {
+        customContainer.innerHTML = `
+          <label style="font-size: 0.75rem; text-transform: uppercase; color: var(--gold-600); font-weight: 700; display: block; margin-bottom: 4px;">Personalization &amp; Custom Scent Notes:</label>
+          <input type="text" id="modal-prod-custom-text" class="form-ctrl" placeholder="e.g. Soap preferences (Honey, Lavender, Pine) + gift message" style="margin-bottom: 14px;" />
+        `;
+        customContainer.style.display = "block";
+      } else {
+        customContainer.innerHTML = "";
+        customContainer.style.display = "none";
+      }
+    }
     
     const buyBtn = $("#modal-prod-buy-btn");
     buyBtn.disabled = prod.stock <= 0;
-    buyBtn.onclick = () => {
+    buyBtn.onclick = () => window.ApothecaryStore.addToCartWithOptions(prod.id); /*
       const qtyInput = $("#modal-prod-qty");
       const qty = parseInt(qtyInput ? qtyInput.value : "1", 10) || 1;
-      addToCart(prod.id, qty);
-      closeProductModal();
-    };
+      */
 
     modal.classList.add("open");
   }
@@ -518,7 +631,9 @@
         id: prod.id,
         sku: prod.sku,
         title: prod.title,
-        size: prod.size,
+        size: item.selectedSize ? `${prod.size} (Size: ${item.selectedSize})` : prod.size,
+        selectedSize: item.selectedSize || null,
+        customText: item.customText || null,
         price: prod.price,
         quantity: item.quantity,
         total: prod.price * item.quantity
@@ -602,6 +717,8 @@
         <td>
           <strong>${item.title}</strong><br>
           <span style="font-size: 0.75rem; color: #666;">SKU: ${item.sku} | ${item.size}</span>
+          ${item.selectedSize ? `<br><span style="font-size: 0.72rem; color: var(--gold-600); font-weight: bold;">Size: ${item.selectedSize}</span>` : ''}
+          ${item.customText ? `<br><span style="font-size: 0.72rem; color: var(--green-accent); font-style: italic;">Personalized: "${item.customText}"</span>` : ''}
         </td>
         <td class="num">${item.quantity}</td>
         <td class="num">$${item.price.toFixed(2)}</td>
@@ -825,6 +942,7 @@
     if (tabId === "tab-portal-pos") renderPortalPos();
     if (tabId === "tab-portal-promos") renderPortalPromos();
     if (tabId === "tab-portal-orders") renderPortalOrders();
+    if (tabId === "tab-portal-dropship") renderPortalDropship();
   }
 
   // ── Product & Soap Management (For the Owner) ────────────────────────────
@@ -1145,7 +1263,9 @@
         id: prod.id,
         sku: prod.sku,
         title: prod.title,
-        size: prod.size,
+        size: item.selectedSize ? `${prod.size} (Size: ${item.selectedSize})` : prod.size,
+        selectedSize: item.selectedSize || null,
+        customText: item.customText || null,
         price: prod.price,
         quantity: item.quantity,
         total: lineTotal

@@ -111,6 +111,8 @@
       <button class="cat-pill" data-cat="tinctures">Tinctures</button>
       <button class="cat-pill" data-cat="teas">Teas &amp; Infusions</button>
       <button class="cat-pill" data-cat="botanicals">Ritual &amp; Space</button>
+      <button class="cat-pill" data-cat="merch">Merch &amp; Apparel</button>
+      <button class="cat-pill" data-cat="custom">Custom Orders</button>
     </div>
 
     <div class="search-sort-group">
@@ -298,6 +300,8 @@
               <p id="modal-prod-usage" style="font-size: 0.82rem; color: var(--ink-700);"></p>
             </div>
 
+            <div id="modal-size-container" style="display: none;"></div>
+            <div id="modal-custom-container" style="display: none;"></div>
             <div style="display: flex; gap: 10px; align-items: center;">
               <label style="font-size: 0.82rem; font-weight: 600;">Qty:</label>
               <input type="number" id="modal-prod-qty" value="1" min="1" max="50" style="width: 60px; padding: 6px; border: 1px solid #ccc; border-radius: 4px; text-align: center;">
@@ -609,6 +613,9 @@
         <button class="portal-tab-btn" data-tab="tab-portal-orders" onclick="window.ApothecaryStore.showPortalTab('tab-portal-orders')">
           🧾 Invoices &amp; Orders
         </button>
+        <button class="portal-tab-btn" data-tab="tab-portal-dropship" onclick="window.ApothecaryStore.showPortalTab('tab-portal-dropship')">
+          🚚 Dropship &amp; Custom Orders
+        </button>
         <button class="portal-tab-btn" data-tab="tab-portal-backup" onclick="window.ApothecaryStore.showPortalTab('tab-portal-backup')">
           💾 Backup &amp; PIN
         </button>
@@ -766,6 +773,14 @@
         </div>
 
         <!-- 5. Backup & PIN -->
+        <div class="portal-view" id="tab-portal-dropship">
+          <div style="margin-bottom: 16px;">
+            <h4 style="font-family: var(--font-serif); font-size: 1.15rem; color: var(--moss-900);">Dropship, Print-on-Demand &amp; Custom Orders Hub</h4>
+            <p style="font-size: 0.8rem; color: #666;">Track incoming orders for shirts, canvas totes, and personalized gift crates. Copy supplier fulfillment manifests with 1 click.</p>
+          </div>
+          <div id="portal-dropship-container"></div>
+        </div>
+
         <div class="portal-view" id="tab-portal-backup">
           <div style="max-width: 600px; display: flex; flex-direction: column; gap: 20px;">
             <div style="background: #fff; padding: 20px; border-radius: 6px; border: 1px solid var(--parchment-300);">
